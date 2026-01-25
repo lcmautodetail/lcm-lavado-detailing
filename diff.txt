@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCM Lavado & Detailing | Ampuero</title>
+
+<meta name="description" content="LCM Lavado & Detailing en Ampuero, Cantabria. Detailing interior y exterior, pulido de faros y paquetes premium.">
+<meta name="keywords" content="detailing Ampuero, lavado coches Cantabria, detailing interior, detailing exterior">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;color:#333;line-height:1.6}
+.container{max-width:1200px;margin:auto;padding:0 20px}
+
+/* HEADER */
+header{
+background:linear-gradient(135deg,#111,#333);
+color:#fff;
+position:fixed;
+width:100%;
+top:0;
+z-index:1000;
+}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
+nav ul{display:flex;list-style:none}
+nav li{margin-left:1.5rem}
+nav a{color:white;text-decoration:none;font-weight:bold}
+nav a:hover{color:#d4af37}
+.logo{font-size:1.6rem}
+
+/* HERO */
+.hero{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+url("https://images.unsplash.com/photo-1605559424843-9e4c228bf1c1");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+text-align:center;
+color:white;
+padding-top:80px;
+}
+.hero h1{font-size:3rem;margin-bottom:1rem}
+.hero p{max-width:600px;margin:auto;font-size:1.2rem}
+
+.btn{
+display:inline-block;
+margin-top:2rem;
+background:#d4af37;
+color:#111;
+padding:12px 30px;
+border-radius:30px;
+font-weight:bold;
+text-decoration:none;
+}
+
+/* SECTIONS */
+section{padding:5rem 0}
+.section-title{
+text-align:center;
+font-size:2.3rem;
+color:#111;
+margin-bottom:3rem;
+}
+
+/* SERVICES */
+.services{background:#f5f5f5}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:2rem;
+}
+.card{
+background:white;
+padding:2rem;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+}
+.price{
+color:#d4af37;
+font-size:1.4rem;
+font-weight:bold;
+margin-top:1rem;
+}
+
+/* ABOUT */
+.about{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:3rem;
+}
+.about ul li{margin-bottom:.5rem}
+
+/* GALLERY */
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:1rem;
+}
+.gallery div{
+background:#ddd;
+height:180px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+color:#555;
+}
+
+/* CONTACT */
+.contact{
+background:#111;
+color:white;
+}
+.contact-box{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:2rem;
+}
+input,textarea{
+width:100%;
+padding:.8rem;
+margin-bottom:1rem;
+border:none;
+border-radius:5px;
+}
+
+/* FOOTER */
+footer{
+background:#000;
+color:white;
+text-align:center;
+padding:1.5rem;
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px 20px;
+border-radius:50px;
+font-weight:bold;
+text-decoration:none;
+z-index:2000;
+}
+
+@media(max-width:768px){
+.about,.contact-box{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav class="container">
+<div class="logo">🚗 LCM Lavado & Detailing</div>
+<ul>
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#servicios">Servicios</a></li>
+<li><a href="#galeria">Galería</a></li>
+<li><a href="#contacto">Contacto</a></li>
+</ul>
+</nav>
+</header>
+
+<section id="inicio" class="hero">
+<div class="container">
+<h1>Detailing Premium en Ampuero</h1>
+<p>Cuidado profesional para tu vehículo con acabados de alto nivel y máxima atención al detalle.</p>
+<a href="#contacto" class="btn">Reservar por WhatsApp</a>
+</div>
+</section>
+
+<section id="servicios" class="services">
+<div class="container">
+<h2 class="section-title">Servicios y Tarifas</h2>
+
+<div class="grid">
+<div class="card">
+<h3>Interior Básico</h3>
+<p>(Sin tapicería)</p>
+<div class="price">50 € – 65 €</div>
+</div>
+
+<div class="card">
+<h3>Interior Completo</h3>
+<p>(Con tapicería)</p>
+<div class="price">70 € – 85 €</div>
+</div>
+
+<div class="card">
+<h3>Detallado Exterior</h3>
+<div class="price">45 € – 60 €</div>
+</div>
+
+<div class="card">
+<h3>Pulido de Faros</h3>
+<div class="price">40 € – 50 €</div>
+</div>
+
+<div class="card">
+<h3>Integral Básico</h3>
+<p>(Sin tapicería)</p>
+<div class="price">80 € – 95 €</div>
+</div>
+
+<div class="card">
+<h3>Integral Premium</h3>
+<p>(Con tapicería)</p>
+<div class="price">100 € – 120 €</div>
+</div>
+
+<div class="card">
+<h3>Mantenimiento</h3>
+<p>Cada 5 o 7 semanas</p>
+<div class="price">60 € – 80 €</div>
+</div>
+</div>
+
+<p style="margin-top:2rem;text-align:center;">
+<strong>Suplementos:</strong> Suciedad alta +10% | Suciedad extrema +20%
+</p>
+
+</div>
+</section>
+
+<section id="galeria">
+<div class="container">
+<h2 class="section-title">Antes y Después</h2>
+<div class="gallery">
+<div>ANTES / DESPUÉS</div>
+<div>ANTES / DESPUÉS</div>
+<div>ANTES / DESPUÉS</div>
+</div>
+<p style="text-align:center;margin-top:1rem;">
+*(Aquí podrás añadir tus fotos reales)*
+</p>
+</div>
+</section>
+
+<section id="contacto" class="contact">
+<div class="container">
+<h2 class="section-title" style="color:white;">Contacto</h2>
+
+<div class="contact-box">
+<div>
+<p><strong>📍 Ubicación:</strong> Ampuero, Cantabria</p>
+<p><strong>📞 Tel / WhatsApp:</strong> +34 681 86 82 92</p>
+<p><strong>✉️ Email:</strong> lcmautodetail@gmail.com</p>
+
+<p style="margin-top:1rem;">
+<strong>Horario:</strong><br>
+L–V: 9:30–14:30 / 15:00–20:00<br>
+Sábados: 9:30–14:30<br>
+Domingos: Cerrado
+</p>
+</div>
+
+<form>
+<input type="text" placeholder="Nombre" required>
+<input type="tel" placeholder="Teléfono" required>
+<textarea placeholder="Mensaje"></textarea>
+<button class="btn">Enviar</button>
+</form>
+</div>
+</div>
+</section>
+
+<footer>
+<p>© 2024 LCM Lavado & Detailing · Ampuero</p>
+</footer>
+
+<a class="whatsapp"
+href="https://wa.me/34681868292?text=Hola,%20quiero%20información%20sobre%20un%20servicio%20de%20detailing"
+target="_blank">
+💬 WhatsApp
+</a>
+
+</body>
+</html>
