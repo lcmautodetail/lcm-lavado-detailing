@@ -209,22 +209,82 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
     font-size: 0.9rem;
   }
 }
+/* =====================
+   MENÚ MÓVIL ANIMADO
+===================== */
 
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+    color: white;
+  }
+
+  nav {
+    position: relative;
+  }
+
+  nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg,#111,#333);
+    flex-direction: column;
+    text-align: center;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition:
+      max-height 0.5s ease,
+      opacity 0.4s ease,
+      transform 0.4s ease;
+  }
+
+  nav ul.active {
+    max-height: 300px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  nav li {
+    margin: 12px 0;
+  }
+
+  nav a {
+    font-size: 1.1rem;
+    display: block;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <nav class="container">
-    <div class="logo">🚗 LCM Lavado & Detailing</div>
-    <ul>
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#galeria">Galería</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-    </ul>
-  </nav>
+ <nav class="container">
+  <div class="logo">🚗 LCM Lavado & Detailing</div>
+
+  <!-- Botón menú móvil -->
+  <div class="menu-toggle" id="menu-toggle">☰</div>
+
+  <ul id="nav-menu">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
 </header>
 
 <!-- HERO -->
@@ -346,6 +406,7 @@ target="_blank">💬 WhatsApp</a>
 
 </body>
 </html>
+
 
 
 
