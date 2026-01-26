@@ -223,6 +223,21 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
 /* Mobile */
 @media (max-width: 768px) {
 
+/* =====================
+   MENÚ MÓVIL FULLSCREEN + BLUR
+===================== */
+
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 3001;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
   .menu-toggle {
     display: block;
     color: white;
@@ -232,39 +247,45 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
     position: relative;
   }
 
+  /* Menú fullscreen */
   nav ul {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg,#111,#333);
+    position: fixed;
+    inset: 0;
+    background: rgba(17,17,17,0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    display: flex;
     flex-direction: column;
-    text-align: center;
-    max-height: 0;
-    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+
     opacity: 0;
+    pointer-events: none;
     transform: translateY(-20px);
-    transition:
-      max-height 0.5s ease,
-      opacity 0.4s ease,
-      transform 0.4s ease;
+    transition: all 0.4s ease;
+
+    z-index: 3000;
   }
 
   nav ul.active {
-    max-height: 300px;
     opacity: 1;
+    pointer-events: all;
     transform: translateY(0);
   }
 
   nav li {
-    margin: 12px 0;
+    margin: 0;
   }
 
   nav a {
-    font-size: 1.1rem;
-    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
   }
 }
+
 </style>
 </head>
 
@@ -423,6 +444,7 @@ target="_blank">💬 WhatsApp</a>
 
 </body>
 </html>
+
 
 
 
