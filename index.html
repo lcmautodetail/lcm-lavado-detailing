@@ -1,289 +1,245 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LCM Lavado & Detailing | Ampuero</title>
-<meta name="description" content="LCM Lavado & Detailing en Ampuero, Cantabria. Detailing interior y exterior, pulido de faros y paquetes premium.">
-<meta name="keywords" content="detailing Ampuero, lavado coches Cantabria, detailing interior, detailing exterior">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCM Lavado & Detailing | Ampuero</title>
+  <meta name="description" content="LCM Lavado & Detailing en Ampuero, Cantabria. Detailing interior y exterior, pulido de faros y paquetes premium.">
+  <meta name="keywords" content="detailing Ampuero, lavado coches Cantabria, detailing interior, detailing exterior">
 
-<style>
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family: 'Arial', sans-serif;
-  line-height:1.6;
-  color:#333;
-  scroll-behavior:smooth;
-  background:#f9f9f9;
-  padding-top:80px;
-}
+  <style>
+  /* RESET */
+  *{margin:0;padding:0;box-sizing:border-box}
 
-/* CONTAINER */
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 20px;
-}
+  body{
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
 
-/* HEADER */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:1000;
-  transition: all 0.3s ease;
-}
-header.transparent{
-  background:rgba(0,0,0,0.3);
-}
-header.solid{
-  background:#111;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
-}
+  .container{
+    max-width: 1200px;
+    margin:auto;
+    padding: 0 20px;
+  }
 
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:1rem 0;
-}
+  /* HEADER */
+  header{
+    background: linear-gradient(135deg,#111,#333);
+    color:#fff;
+    position: fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.4);
+  }
+  nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 0;
+  }
+  nav ul{
+    display:flex;
+    list-style:none;
+  }
+  nav li{
+    margin-left:1.5rem;
+  }
+  nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+  }
+  nav a:hover{color:#d4af37;}
+  .logo{font-size:1.6rem;}
 
-nav ul{display:flex;list-style:none}
-nav li{margin-left:1.5rem}
-nav a{
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-  transition:color 0.3s;
-}
-nav a:hover{color:#d4af37}
-.logo{font-size:1.6rem;color:white;font-weight:bold}
+  /* HERO */
+  .hero{
+    height: 100vh;
+    background: url('img/fondo-hero.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    color: white;
+    padding-top: 0;
+  }
+  .hero-overlay {
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+  }
+  .hero-logo{
+    max-width:300px;
+    width:80%;
+    margin-bottom:30px;
+    border-radius:12px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.4);
+  }
+  .hero h1{font-size:3rem;margin-bottom:1rem;}
+  .hero p{font-size:1.2rem;max-width:600px;margin-bottom:2rem;}
+  .hero .btn{
+    background:#d4af37;
+    color:#111;
+    padding:12px 30px;
+    border-radius:30px;
+    font-weight:bold;
+    text-decoration:none;
+    transition: transform 0.3s;
+  }
+  .hero .btn:hover{transform: scale(1.05);}
 
-/* HERO */
-.hero {
-  height: 100vh;
-  background: url('img/fondo-hero.jpg') no-repeat center center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  color: white;
-  padding-top: 0;
-}
+  /* SECTIONS */
+  section{padding:5rem 0;}
+  .section-title{
+    text-align:center;
+    font-size:2.3rem;
+    color:#111;
+    margin-bottom:3rem;
+  }
 
-/* Capa overlay para sombrear el fondo y hacer que el logo resalte */
-.hero-overlay {
-  background: rgba(0,0,0,0.6); /* semi-transparente para resaltar logo y texto */
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-}
+  /* SERVICES */
+  .services{background:#f5f5f5}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:2rem;
+  }
+  .card{
+    background:white;
+    padding:2rem;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    text-align:center;
+  }
+  .price{
+    color:#d4af37;
+    font-size:1.4rem;
+    font-weight:bold;
+    margin-top:1rem;
+  }
 
-/* Logo grande ocupando gran parte del hero */
-.hero-logo {
-  max-width: 300px;
-  width: 80%;
-  margin-bottom: 30px;
-  border-radius: 12px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-}
+  /* CONTACT */
+  .contact{
+    background:#111;
+    color:white;
+  }
+  .contact-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+  }
+  input,textarea{
+    width:100%;
+    padding:.8rem;
+    margin-bottom:1rem;
+    border:none;
+    border-radius:5px;
+  }
+  .contact button{
+    width:100%;
+    background:#d4af37;
+    color:#111;
+    border:none;
+    padding:12px;
+    font-weight:bold;
+    border-radius:30px;
+    cursor:pointer;
+    transition: transform 0.3s;
+  }
+  .contact button:hover{transform: scale(1.05);}
 
-/* Hero texto y botón */
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
+  /* FOOTER */
+  footer{
+    background:#000;
+    color:white;
+    text-align:center;
+    padding:1.5rem;
+  }
 
-.hero p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin-bottom: 2rem;
-}
+  /* WHATSAPP */
+  .whatsapp{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:15px 20px;
+    border-radius:50px;
+    font-weight:bold;
+    text-decoration:none;
+    z-index:2000;
+  }
 
-.hero .btn {
-  background: #d4af37;
-  color: #111;
-  padding: 12px 30px;
-  border-radius: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: transform 0.3s;
-}
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .about,.contact-box{grid-template-columns:1fr;}
+    .hero h1{font-size:2rem;}
+    .hero-logo{max-width:200px;}
+    .hero p{font-size:1rem;}
+  }
 
-.hero .btn:hover {
-  transform: scale(1.05);
-}
-
-/* Responsive */
-@media(max-width:768px){
-  .hero h1 { font-size: 2rem; }
-  .hero-logo { max-width: 200px; }
-  .hero p { font-size: 1rem; }
-}
-
-
-/* SECTIONS */
-section{
-  padding:5rem 0;
-}
-.section-title{
-  text-align:center;
-  font-size:2.5rem;
-  margin-bottom:3rem;
-  color:#111;
-  position:relative;
-}
-.section-title::after{
-  content:"";
-  display:block;
-  width:60px;
-  height:3px;
-  background:#d4af37;
-  margin:0.5rem auto 0;
-  border-radius:2px;
-}
-
-/* SERVICES */
-.services{background:#f5f5f5}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:2rem;
-}
-.card{
-  background:white;
-  padding:2rem;
-  border-radius:12px;
-  box-shadow:0 10px 20px rgba(0,0,0,.1);
-  text-align:center;
-  transition:all 0.3s;
-}
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 15px 25px rgba(0,0,0,.15);
-}
-.price{
-  color:#d4af37;
-  font-size:1.4rem;
-  font-weight:bold;
-  margin-top:1rem;
-}
-
-/* GALLERY (slider) */
-.gallery-slider{
-  position:relative;
-  overflow:hidden;
-  max-width:1000px;
-  margin:2rem auto;
-}
-.gallery-track{
-  display:flex;
-  transition:transform 0.5s ease;
-}
-.gallery-item{
-  min-width:100%;
-  padding:0 10px;
-  box-sizing:border-box;
-}
-.gallery-item img{
-  width:100%;
-  border-radius:12px;
-  object-fit:cover;
-}
-.slider-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,0.5);
-  color:white;
-  border:none;
-  padding:10px;
-  font-size:1.5rem;
-  cursor:pointer;
-  border-radius:50%;
-}
-.slider-btn.left{left:10px;}
-.slider-btn.right{right:10px;}
-
-/* CONTACT */
-.contact{
-  background:#111;
-  color:white;
-}
-.contact-box{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:2rem;
-}
-input,textarea{
-  width:100%;
-  padding:1rem;
-  margin-bottom:1rem;
-  border:none;
-  border-radius:5px;
-}
-
-/* FOOTER */
-footer{
-  background:#000;
-  color:white;
-  text-align:center;
-  padding:2rem;
-  font-size:0.9rem;
-}
-
-/* WHATSAPP */
-.whatsapp-float{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:60px;
-  height:60px;
-  background:#25D366;
-  color:white;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:28px;
-  box-shadow:0 5px 15px rgba(0,0,0,.3);
-  z-index:1000;
-  text-decoration:none;
-  transition:transform 0.3s;
-}
-.whatsapp-float:hover{transform:scale(1.1);}
-
-@media(max-width:768px){
-  .contact-box{grid-template-columns:1fr;}
-  .gallery-item img{height:auto;}
-}
-  .hero-logo {
-  margin: 20px 0;
-}
-
-.hero-logo img {
-  max-width: 200px;
-  width: 50%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 12px; /* opcional, para darle un estilo suave */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* para que no quede flotando */
-  background: rgba(255,255,255,0.1); /* ligera base sobre la imagen de fondo */
-  padding: 10px;
-}
-
-</style>
+  /* GALERÍA ANTES/DESPUÉS */
+  .before-after-gallery{display:grid;gap:3rem;}
+  .before-after-item h3{text-align:center;margin-bottom:1rem;color:#1e3c72;}
+  .ba-container{
+    position: relative;
+    width:100%;
+    max-width:800px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:12px;
+    height:400px;
+  }
+  .ba-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    position:absolute;
+    top:0; left:0;
+  }
+  .ba-container .after{z-index:1;}
+  .ba-container .before{
+    z-index:2;
+    clip-path: inset(0 50% 0 0);
+    transition: clip-path 0.2s;
+  }
+  .ba-slider{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:80%;
+    z-index:3;
+    -webkit-appearance:none;
+    height:6px;
+    border-radius:3px;
+    background: rgba(212,175,55,0.8);
+    cursor:pointer;
+  }
+  .ba-slider::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    background:#fff;
+    border:2px solid #d4af37;
+    border-radius:50%;
+    cursor:pointer;
+    box-shadow:0 2px 5px rgba(0,0,0,.3);
+  }
+  @media(max-width:768px){.ba-container{height:250px;}}
+  </style>
 </head>
 <body>
 
-<header class="transparent">
+<header>
   <nav class="container">
     <div class="logo">🚗 LCM Lavado & Detailing</div>
     <ul>
@@ -295,16 +251,17 @@ footer{
   </nav>
 </header>
 
+<!-- HERO -->
 <section id="inicio" class="hero">
   <div class="hero-overlay">
     <img src="img/logo.png" alt="Logo LCM Lavado & Detailing" class="hero-logo">
-    <h1>Limpieza Profesional de Automóviles en Ampuero</h1>
+    <h1>Detailing Profesional en Ampuero</h1>
     <p>Cuidado profesional y ecológico para tu vehículo con acabados de alto nivel y máxima atención al detalle.</p>
     <a href="#contacto" class="btn">Reservar por WhatsApp</a>
   </div>
 </section>
 
-
+<!-- SERVICIOS -->
 <section id="servicios" class="services">
   <div class="container">
     <h2 class="section-title">Servicios y Tarifas</h2>
@@ -321,12 +278,10 @@ footer{
   </div>
 </section>
 
+<!-- GALERÍA ANTES/DESPUÉS -->
 <section id="galeria">
   <h2 class="section-title">Antes y Después</h2>
-
   <div class="before-after-gallery container">
-
-    <!-- ITEM 1: INTERIOR -->
     <div class="before-after-item">
       <h3>Interior</h3>
       <div class="ba-container">
@@ -335,8 +290,6 @@ footer{
         <input type="range" min="0" max="100" value="50" class="ba-slider">
       </div>
     </div>
-
-    <!-- ITEM 2: EXTERIOR -->
     <div class="before-after-item">
       <h3>Exterior</h3>
       <div class="ba-container">
@@ -345,8 +298,6 @@ footer{
         <input type="range" min="0" max="100" value="50" class="ba-slider">
       </div>
     </div>
-
-    <!-- ITEM 3: PULIDO DE FAROS -->
     <div class="before-after-item">
       <h3>Pulido de Faros</h3>
       <div class="ba-container">
@@ -355,96 +306,10 @@ footer{
         <input type="range" min="0" max="100" value="50" class="ba-slider">
       </div>
     </div>
-
   </div>
 </section>
 
-<style>
-.before-after-gallery {
-  display: grid;
-  gap: 3rem;
-}
-
-.before-after-item h3 {
-  text-align:center;
-  margin-bottom:1rem;
-  color:#1e3c72;
-}
-
-.ba-container {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.ba-container img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-  border-radius: 12px;
-  position: absolute;
-  top:0; left:0;
-  height:400px;
-}
-
-.ba-container .after {
-  z-index:1;
-}
-
-.ba-container .before {
-  z-index:2;
-  width: 50%; /* valor inicial de slider */
-  overflow: hidden;
-  clip-path: inset(0 50% 0 0);
-  transition: clip-path 0.2s;
-}
-
-.ba-slider {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  z-index: 3;
-  -webkit-appearance: none;
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(212,175,55,0.8);
-  cursor: pointer;
-}
-
-.ba-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width:20px;
-  height:20px;
-  background:#fff;
-  border:2px solid #d4af37;
-  border-radius:50%;
-  cursor:pointer;
-  box-shadow:0 2px 5px rgba(0,0,0,.3);
-}
-
-@media(max-width:768px){
-  .ba-container img{height:250px;}
-}
-</style>
-
-<script>
-document.querySelectorAll('.ba-container').forEach(container=>{
-  const before = container.querySelector('.before');
-  const slider = container.querySelector('.ba-slider');
-
-  slider.addEventListener('input', e=>{
-    const value = e.target.value;
-    before.style.clipPath = `inset(0 ${100-value}% 0 0)`;
-  });
-});
-</script>
-
-
+<!-- CONTACTO -->
 <section id="contacto" class="contact">
   <div class="container">
     <h2 class="section-title" style="color:white;">Contacto</h2>
@@ -453,62 +318,45 @@ document.querySelectorAll('.ba-container').forEach(container=>{
         <p><strong>📍 Ubicación:</strong> Ampuero, Cantabria</p>
         <p><strong>📞 Tel / WhatsApp:</strong> +34 681 86 82 92</p>
         <p><strong>✉️ Email:</strong> lcmautodetail@gmail.com</p>
-        <p style="margin-top:1rem;"><strong>Horario:</strong><br>
-        L–V: 9:30–14:30 / 15:00–20:00<br>
-        Sábados: 9:30–14:30<br>
-        Domingos: Cerrado</p>
+        <p style="margin-top:1rem;">
+          <strong>Horario:</strong><br>
+          L–V: 9:30–14:30 / 15:00–20:00<br>
+          Sábados: 9:30–14:30<br>
+          Domingos: Cerrado
+        </p>
       </div>
       <form>
         <input type="text" placeholder="Nombre" required>
         <input type="tel" placeholder="Teléfono" required>
         <textarea placeholder="Mensaje"></textarea>
-        <button class="btn">Enviar</button>
+        <button>Enviar</button>
       </form>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 LCM Lavado & Detailing · Ampuero</p>
+  <p>© 2024 LCM Lavado & Detailing · Ampuero</p>
 </footer>
 
-<a href="https://wa.me/34681868292" class="whatsapp-float" target="_blank">💬</a>
+<a class="whatsapp"
+href="https://wa.me/34681868292?text=Hola,%20quiero%20información%20sobre%20un%20servicio%20de%20limpieza"
+target="_blank">💬 WhatsApp</a>
 
 <script>
-// Header transparente -> sólido al scroll
-const header = document.querySelector('header');
-window.addEventListener('scroll', () => {
-  if(window.scrollY > 50){
-    header.classList.remove('transparent');
-    header.classList.add('solid');
-  } else {
-    header.classList.add('transparent');
-    header.classList.remove('solid');
-  }
-});
-
-// Slider básico
-const track = document.querySelector('.gallery-track');
-const slides = Array.from(track.children);
-const btnLeft = document.querySelector('.slider-btn.left');
-const btnRight = document.querySelector('.slider-btn.right');
-let index = 0;
-
-function updateSlider(){
-  track.style.transform = `translateX(-${index * 100}%)`;
-}
-btnRight.addEventListener('click',()=>{
-  index = (index+1) % slides.length;
-  updateSlider();
-});
-btnLeft.addEventListener('click',()=>{
-  index = (index-1 + slides.length) % slides.length;
-  updateSlider();
-});
+  document.querySelectorAll('.ba-container').forEach(container=>{
+    const before = container.querySelector('.before');
+    const slider = container.querySelector('.ba-slider');
+    slider.addEventListener('input', e=>{
+      const value = e.target.value;
+      before.style.clipPath = `inset(0 ${100-value}% 0 0)`;
+    });
+  });
 </script>
 
 </body>
 </html>
+
 
 
 
