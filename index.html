@@ -246,6 +246,22 @@ footer{
   .contact-box{grid-template-columns:1fr;}
   .gallery-item img{height:auto;}
 }
+  .hero-logo {
+  margin: 20px 0;
+}
+
+.hero-logo img {
+  max-width: 200px;
+  width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px; /* opcional, para darle un estilo suave */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* para que no quede flotando */
+  background: rgba(255,255,255,0.1); /* ligera base sobre la imagen de fondo */
+  padding: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -264,6 +280,10 @@ footer{
 
 <section id="inicio" class="hero">
   <h1>Limpieza Profesional de automóviles en Ampuero</h1>
+   <!-- Logo central -->
+  <div class="hero-logo">
+    <img src="img/logo.png" alt="Logo LCM Lavado & Detailing">
+  </div>
   <p>Cuidado profesional y ecológico para tu vehículo con acabados de alto nivel y máxima atención al detalle.</p>
   <a href="#contacto" class="btn">Reservar por WhatsApp</a>
 </section>
@@ -472,6 +492,7 @@ btnLeft.addEventListener('click',()=>{
 
 </body>
 </html>
+
 
 
 
