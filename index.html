@@ -403,9 +403,27 @@ target="_blank">💬 WhatsApp</a>
     });
   });
 </script>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('nav-menu');
+
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('active');
+    toggle.textContent = menu.classList.contains('active') ? '✕' : '☰';
+  });
+
+  // Cerrar menú al pulsar un enlace
+  document.querySelectorAll('#nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('active');
+      toggle.textContent = '☰';
+    });
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
