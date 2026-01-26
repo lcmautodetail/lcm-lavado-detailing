@@ -1,103 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LCM Lavado & Detailing | Ampuero</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="LCM Lavado & Detailing en Ampuero, Cantabria. Detailing interior y exterior, pulido de faros y paquetes premium.">
-  <meta name="keywords" content="detailing Ampuero, lavado coches Cantabria, detailing interior, detailing exterior">
+<title>LCM Lavado & Detailing | Ampuero</title>
 
-  <style>
-  *{margin:0;padding:0;box-sizing:border-box}
+<meta name="description" content="LCM Lavado & Detailing en Ampuero, Cantabria. Detailing interior y exterior, pulido de faros y paquetes premium.">
 
-  body{
-    font-family:Arial,sans-serif;
-    color:#333;
-    line-height:1.6;
-  }
-
-  .container{
-    max-width:1200px;
-    margin:auto;
-    padding:0 20px;
-  }
-
-  /* GALERÍA ANTES / DESPUÉS */
-  .gallery-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-    gap:30px;
-    margin-top:40px;
-  }
-
-  .gallery-item{
-    background:#f5f5f5;
-    padding:20px;
-    border-radius:16px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-    text-align:center;
-  }
-
-  .gallery-item h3{
-    margin-bottom:15px;
-    color:#1e3c72;
-  }
-
-  .before-after{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .before-after img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
-    border-radius:12px;
-  }
-
-  /* BOTÓN WHATSAPP */
-  .whatsapp-float{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    width:60px;
-    height:60px;
-    background:#25D366;
-    color:#fff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    box-shadow:0 5px 15px rgba(0,0,0,.3);
-    z-index:999;
-    text-decoration:none;
-  }
-
-  .whatsapp-float:hover{
-    transform:scale(1.05);
-  }
-  </style>
-</head>
-
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;line-height:1.6;color:#333}
+.container{max-width:1200px;margin:auto;padding:0 20px}
 
 /* HEADER */
 header{
 background:linear-gradient(135deg,#111,#333);
-color:#fff;
+color:white;
 position:fixed;
-width:100%;
-top:0;
-z-index:1000;
+top:0;width:100%;z-index:1000;
 }
 nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
 nav ul{display:flex;list-style:none}
 nav li{margin-left:1.5rem}
 nav a{color:white;text-decoration:none;font-weight:bold}
-nav a:hover{color:#d4af37}
-.logo{font-size:1.6rem}
+.logo{font-size:1.4rem}
 
 /* HERO */
 .hero{
@@ -108,38 +35,32 @@ background-size:cover;
 background-position:center;
 display:flex;
 align-items:center;
-text-align:center;
 color:white;
+text-align:center;
 padding-top:80px;
 }
 .hero h1{font-size:3rem;margin-bottom:1rem}
-.hero p{max-width:600px;margin:auto;font-size:1.2rem}
 
 .btn{
 display:inline-block;
-margin-top:2rem;
 background:#d4af37;
 color:#111;
 padding:12px 30px;
 border-radius:30px;
+margin-top:2rem;
 font-weight:bold;
 text-decoration:none;
 }
 
 /* SECTIONS */
 section{padding:5rem 0}
-.section-title{
-text-align:center;
-font-size:2.3rem;
-color:#111;
-margin-bottom:3rem;
-}
+.section-title{text-align:center;font-size:2.3rem;margin-bottom:3rem}
 
 /* SERVICES */
 .services{background:#f5f5f5}
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:2rem;
 }
 .card{
@@ -149,42 +70,35 @@ border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,.1);
 text-align:center;
 }
-.price{
-color:#d4af37;
-font-size:1.4rem;
-font-weight:bold;
-margin-top:1rem;
-}
+.price{color:#d4af37;font-size:1.4rem;margin-top:1rem}
 
-/* ABOUT */
-.about{
+/* GALERÍA */
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+.gallery-item{
+background:#fff;
+padding:20px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+text-align:center;
+}
+.before-after{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:3rem;
+gap:10px;
 }
-.about ul li{margin-bottom:.5rem}
-
-/* GALLERY */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:1rem;
-}
-.gallery div{
-background:#ddd;
-height:180px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-color:#555;
+.before-after img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:12px;
 }
 
-/* CONTACT */
-.contact{
-background:#111;
-color:white;
-}
+/* CONTACTO */
+.contact{background:#111;color:white}
 .contact-box{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -199,29 +113,29 @@ border-radius:5px;
 }
 
 /* FOOTER */
-footer{
-background:#000;
-color:white;
-text-align:center;
-padding:1.5rem;
-}
+footer{background:#000;color:white;text-align:center;padding:1.5rem}
 
 /* WHATSAPP */
-.whatsapp{
+.whatsapp-float{
 position:fixed;
 bottom:20px;
 right:20px;
+width:60px;
+height:60px;
 background:#25D366;
 color:white;
-padding:15px 20px;
-border-radius:50px;
-font-weight:bold;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
 text-decoration:none;
-z-index:2000;
+z-index:999;
 }
 
 @media(max-width:768px){
-.about,.contact-box{grid-template-columns:1fr}
+.contact-box{grid-template-columns:1fr}
+.hero h1{font-size:2.2rem}
 }
 </style>
 </head>
@@ -230,7 +144,7 @@ z-index:2000;
 
 <header>
 <nav class="container">
-<div class="logo">🚗 LCM Lavado & Detailing</div>
+<div class="logo">🚗 LCM Detailing</div>
 <ul>
 <li><a href="#inicio">Inicio</a></li>
 <li><a href="#servicios">Servicios</a></li>
@@ -243,154 +157,58 @@ z-index:2000;
 <section id="inicio" class="hero">
 <div class="container">
 <h1>Detailing Premium en Ampuero</h1>
-<p>Cuidado profesional para tu vehículo con acabados de alto nivel y máxima atención al detalle.</p>
-<a href="#contacto" class="btn">Reservar por WhatsApp</a>
+<p>Cuidado profesional para tu vehículo</p>
+<a href="#contacto" class="btn">Reservar</a>
 </div>
 </section>
 
 <section id="servicios" class="services">
 <div class="container">
-<h2 class="section-title">Servicios y Tarifas</h2>
-
+<h2 class="section-title">Servicios</h2>
 <div class="grid">
-<div class="card">
-<h3>Interior Básico</h3>
-<p>(Sin tapicería)</p>
-<div class="price">50 € – 65 €</div>
+<div class="card"><h3>Interior Básico</h3><div class="price">50–65 €</div></div>
+<div class="card"><h3>Interior Completo</h3><div class="price">70–85 €</div></div>
+<div class="card"><h3>Exterior</h3><div class="price">45–60 €</div></div>
+<div class="card"><h3>Pulido de Faros</h3><div class="price">40–50 €</div></div>
 </div>
-
-<div class="card">
-<h3>Interior Completo</h3>
-<p>(Con tapicería)</p>
-<div class="price">70 € – 85 €</div>
-</div>
-
-<div class="card">
-<h3>Detallado Exterior</h3>
-<div class="price">45 € – 60 €</div>
-</div>
-
-<div class="card">
-<h3>Pulido de Faros</h3>
-<div class="price">40 € – 50 €</div>
-</div>
-
-<div class="card">
-<h3>Integral Básico</h3>
-<p>(Sin tapicería)</p>
-<div class="price">80 € – 95 €</div>
-</div>
-
-<div class="card">
-<h3>Integral Premium</h3>
-<p>(Con tapicería)</p>
-<div class="price">100 € – 120 €</div>
-</div>
-
-<div class="card">
-<h3>Mantenimiento</h3>
-<p>Cada 5 o 7 semanas</p>
-<div class="price">60 € – 80 €</div>
-</div>
-</div>
-
-<p style="margin-top:2rem;text-align:center;">
-<strong>Suplementos:</strong> Suciedad alta +10% | Suciedad extrema +20%
-</p>
-
 </div>
 </section>
 
 <section id="galeria">
-  <h2 class="section-title">Antes y Después</h2>
+<div class="container">
+<h2 class="section-title">Antes y Después</h2>
 
-  <div class="gallery-grid">
-
-    <div class="gallery-item">
-      <h3>Interior</h3>
-      <div class="before-after">
-        <img src="img/interior-antes.jpg.jpeg" alt="Interior antes">
-        <img src="img/interior-despues.jpg.jpeg" alt="Interior después">
-      </div>
-    </div>
-
-    <div class="gallery-item">
-      <h3>Exterior</h3>
-      <div class="before-after">
-        <img src="img/exterior-antes.jpg.jpeg" alt="Exterior antes">
-        <img src="img/exterior-despues.jpg.jpeg" alt="Exterior después">
-      </div>
-    </div>
-
-    <div class="gallery-item">
-      <h3>Pulido de Faros</h3>
-      <div class="before-after">
-        <img src="img/pulido-antes.jpg.jpeg" alt="Faros antes">
-        <img src="img/pulido-despues.jpg.jpeg" alt="Faros después">
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
+<div class="gallery-grid">
+<div class="gallery-item">
+<h3>Interior</h3>
+<div class="before-after">
+<img src="img/interior-antes.jpg" alt="">
+<img src="img/interior-despues.jpg" alt="">
 </div>
-<p style="text-align:center;margin-top:1rem;">
-*(Aquí podrás añadir tus fotos reales)*
-</p>
+</div>
+</div>
+
 </div>
 </section>
 
 <section id="contacto" class="contact">
 <div class="container">
-<h2 class="section-title" style="color:white;">Contacto</h2>
-
-<div class="contact-box">
-<div>
-<p><strong>📍 Ubicación:</strong> Ampuero, Cantabria</p>
-<p><strong>📞 Tel / WhatsApp:</strong> +34 681 86 82 92</p>
-<p><strong>✉️ Email:</strong> lcmautodetail@gmail.com</p>
-
-<p style="margin-top:1rem;">
-<strong>Horario:</strong><br>
-L–V: 9:30–14:30 / 15:00–20:00<br>
-Sábados: 9:30–14:30<br>
-Domingos: Cerrado
-</p>
-</div>
-
-<form>
-<input type="text" placeholder="Nombre" required>
-<input type="tel" placeholder="Teléfono" required>
-<textarea placeholder="Mensaje"></textarea>
-<button class="btn">Enviar</button>
-</form>
-</div>
+<h2 class="section-title">Contacto</h2>
+<p>📍 Ampuero · 📞 681 86 82 92 · ✉️ lcmautodetail@gmail.com</p>
 </div>
 </section>
 
 <footer>
-<p>© 2024 LCM Lavado & Detailing · Ampuero</p>
+<p>© LCM Lavado & Detailing</p>
 </footer>
 
-<a class="whatsapp"
-href="https://wa.me/34681868292?text=Hola,%20quiero%20información%20sobre%20un%20servicio%20de%20detailing"
-target="_blank">
-💬 WhatsApp
-</a>
-<a href="https://wa.me/34681868292?text=Hola%20👋%20Quiero%20información%20para%20un%20servicio%20de%20detailing%20en%20LCM%20Lavado%20%26%20Detailing."
-   class="whatsapp-float"
-   target="_blank">
-  💬 WhatsApp
-</a>
-<a href="https://wa.me/34681868292?text=Hola%20👋%20Quiero%20información%20para%20un%20servicio%20de%20limpieza."
-   class="whatsapp-float"
-   target="_blank">
-   💬
-</a>
+<a class="whatsapp-float"
+href="https://wa.me/34681868292?text=Hola%20quiero%20información"
+target="_blank">💬</a>
 
 </body>
 </html>
+
 
 
 
