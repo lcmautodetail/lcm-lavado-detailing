@@ -13,11 +13,12 @@
 body{font-family:Arial,sans-serif;color:#333;line-height:1.6}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 /* GALERÍA ANTES / DESPUÉS */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:2rem;
-}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;color:#333;line-height:1.6}
+.container{max-width:1200px;margin:auto;padding:0 20px}
+
+/* GALERÍA ANTES / DESPUÉS */
 .gallery-grid{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
@@ -51,24 +52,6 @@ body{font-family:Arial,sans-serif;color:#333;line-height:1.6}
   border-radius:12px;
 }
 
-.gallery-item{
-  background:#fff;
-  padding:1rem;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,.1);
-  text-align:center;
-}
-
-.gallery-item h4{
-  margin-bottom:1rem;
-  color:#111;
-}
-
-.gallery-item img{
-  width:100%;
-  border-radius:8px;
-  margin-bottom:.5rem;
-}
 
 /* HEADER */
 header{
@@ -365,9 +348,15 @@ href="https://wa.me/34681868292?text=Hola,%20quiero%20información%20sobre%20un%
 target="_blank">
 💬 WhatsApp
 </a>
+<a href="https://wa.me/34681868292?text=Hola%20👋%20Quiero%20información%20para%20un%20servicio%20de%20detailing%20en%20LCM%20Lavado%20%26%20Detailing."
+   class="whatsapp-float"
+   target="_blank">
+  💬 WhatsApp
+</a>
 
 </body>
 </html>
+
 
 
 
