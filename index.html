@@ -286,19 +286,127 @@ footer{
 
 <section id="galeria">
   <h2 class="section-title">Antes y Después</h2>
-  <div class="gallery-slider">
-    <button class="slider-btn left">&#10094;</button>
-    <div class="gallery-track">
-      <div class="gallery-item"><img src="img/interior-antes.jpg.jpeg" alt="Interior antes"></div>
-      <div class="gallery-item"><img src="img/interior-despues.jpg.jpeg" alt="Interior después"></div>
-      <div class="gallery-item"><img src="img/exterior-antes.jpg.jpeg" alt="Exterior antes"></div>
-      <div class="gallery-item"><img src="img/exterior-despues.jpg.jpeg" alt="Exterior después"></div>
-      <div class="gallery-item"><img src="img/pulido-antes.jpg.jpeg" alt="Faros antes"></div>
-      <div class="gallery-item"><img src="img/pulido-despues.jpg.jpeg" alt="Faros después"></div>
+
+  <div class="before-after-gallery container">
+
+    <!-- ITEM 1: INTERIOR -->
+    <div class="before-after-item">
+      <h3>Interior</h3>
+      <div class="ba-container">
+        <img src="img/interior-despues.jpg.jpeg" class="after">
+        <img src="img/interior-antes.jpg.jpeg" class="before">
+        <input type="range" min="0" max="100" value="50" class="ba-slider">
+      </div>
     </div>
-    <button class="slider-btn right">&#10095;</button>
+
+    <!-- ITEM 2: EXTERIOR -->
+    <div class="before-after-item">
+      <h3>Exterior</h3>
+      <div class="ba-container">
+        <img src="img/exterior-despues.jpg.jpeg" class="after">
+        <img src="img/exterior-antes.jpg.jpeg" class="before">
+        <input type="range" min="0" max="100" value="50" class="ba-slider">
+      </div>
+    </div>
+
+    <!-- ITEM 3: PULIDO DE FAROS -->
+    <div class="before-after-item">
+      <h3>Pulido de Faros</h3>
+      <div class="ba-container">
+        <img src="img/pulido-despues.jpg.jpeg" class="after">
+        <img src="img/pulido-antes.jpg.jpeg" class="before">
+        <input type="range" min="0" max="100" value="50" class="ba-slider">
+      </div>
+    </div>
+
   </div>
 </section>
+
+<style>
+.before-after-gallery {
+  display: grid;
+  gap: 3rem;
+}
+
+.before-after-item h3 {
+  text-align:center;
+  margin-bottom:1rem;
+  color:#1e3c72;
+}
+
+.ba-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.ba-container img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  position: absolute;
+  top:0; left:0;
+  height:400px;
+}
+
+.ba-container .after {
+  z-index:1;
+}
+
+.ba-container .before {
+  z-index:2;
+  width: 50%; /* valor inicial de slider */
+  overflow: hidden;
+  clip-path: inset(0 50% 0 0);
+  transition: clip-path 0.2s;
+}
+
+.ba-slider {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  z-index: 3;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(212,175,55,0.8);
+  cursor: pointer;
+}
+
+.ba-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width:20px;
+  height:20px;
+  background:#fff;
+  border:2px solid #d4af37;
+  border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 2px 5px rgba(0,0,0,.3);
+}
+
+@media(max-width:768px){
+  .ba-container img{height:250px;}
+}
+</style>
+
+<script>
+document.querySelectorAll('.ba-container').forEach(container=>{
+  const before = container.querySelector('.before');
+  const slider = container.querySelector('.ba-slider');
+
+  slider.addEventListener('input', e=>{
+    const value = e.target.value;
+    before.style.clipPath = `inset(0 ${100-value}% 0 0)`;
+  });
+});
+</script>
+
 
 <section id="contacto" class="contact">
   <div class="container">
@@ -364,3 +472,4 @@ btnLeft.addEventListener('click',()=>{
 
 </body>
 </html>
+
