@@ -99,7 +99,117 @@ border-radius:12px;
 
 /* CONTACTO */
 .contact{background:#111;color:white}
-.contact-b
+.contact-box{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:2rem;
+}
+input,textarea{
+width:100%;
+padding:.8rem;
+margin-bottom:1rem;
+border:none;
+border-radius:5px;
+}
+
+/* FOOTER */
+footer{background:#000;color:white;text-align:center;padding:1.5rem}
+
+/* WHATSAPP */
+.whatsapp-float{
+position:fixed;
+bottom:20px;
+right:20px;
+width:60px;
+height:60px;
+background:#25D366;
+color:white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+text-decoration:none;
+z-index:999;
+}
+
+@media(max-width:768px){
+.contact-box{grid-template-columns:1fr}
+.hero h1{font-size:2.2rem}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav class="container">
+<div class="logo">🚗 LCM Detailing</div>
+<ul>
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#servicios">Servicios</a></li>
+<li><a href="#galeria">Galería</a></li>
+<li><a href="#contacto">Contacto</a></li>
+</ul>
+</nav>
+</header>
+
+<section id="inicio" class="hero">
+<div class="container">
+<h1>Detailing Premium en Ampuero</h1>
+<p>Cuidado profesional para tu vehículo</p>
+<a href="#contacto" class="btn">Reservar</a>
+</div>
+</section>
+
+<section id="servicios" class="services">
+<div class="container">
+<h2 class="section-title">Servicios</h2>
+<div class="grid">
+<div class="card"><h3>Interior Básico</h3><div class="price">50–65 €</div></div>
+<div class="card"><h3>Interior Completo</h3><div class="price">70–85 €</div></div>
+<div class="card"><h3>Exterior</h3><div class="price">45–60 €</div></div>
+<div class="card"><h3>Pulido de Faros</h3><div class="price">40–50 €</div></div>
+</div>
+</div>
+</section>
+
+<section id="galeria">
+<div class="container">
+<h2 class="section-title">Antes y Después</h2>
+
+<div class="gallery-grid">
+<div class="gallery-item">
+<h3>Interior</h3>
+<div class="before-after">
+<img src="img/interior-antes.jpg" alt="">
+<img src="img/interior-despues.jpg" alt="">
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="contacto" class="contact">
+<div class="container">
+<h2 class="section-title">Contacto</h2>
+<p>📍 Ampuero · 📞 681 86 82 92 · ✉️ lcmautodetail@gmail.com</p>
+</div>
+</section>
+
+<footer>
+<p>© LCM Lavado & Detailing</p>
+</footer>
+
+<a class="whatsapp-float"
+href="https://wa.me/34681868292?text=Hola%20quiero%20información"
+target="_blank">💬</a>
+
+</body>
+</html>
+
+
 
 
 
