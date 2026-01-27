@@ -90,10 +90,9 @@ nav a:hover{color:#d4af37;}
 section{padding:5rem 0;}
 .section-title{
   text-align:center;
-  font-size:2.6rem;
-  font-weight:800;
+  font-size:2.4rem;
   color:#111;
-  margin-bottom:3.5rem;
+  margin-bottom:3rem;
   position:relative;
 }
 
@@ -104,7 +103,7 @@ section{padding:5rem 0;}
   height:4px;
   background:#d4af37;
   margin:15px auto 0;
-  border-radius:2px;
+  border-radius:5px;
 }
 
 /* SERVICES */
@@ -116,31 +115,16 @@ section{padding:5rem 0;}
 }
 .card{
   background:white;
-  padding:2.2rem 2rem;
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  padding:2.5rem 2rem;
+  border-radius:16px;
+  box-shadow:0 15px 30px rgba(0,0,0,.12);
   text-align:center;
-  transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(212,175,55,0.15),transparent);
-  opacity:0;
-  transition:opacity 0.3s ease;
-}
-
-.card:hover::before{
-  opacity:1;
+  transition: transform .3s ease, box-shadow .3s ease;
 }
 
 .card:hover{
   transform: translateY(-12px);
-  box-shadow:0 25px 50px rgba(0,0,0,0.18);
+  box-shadow:0 25px 50px rgba(0,0,0,.25);
 }
 
 /* CONTACT */
@@ -158,9 +142,24 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
 
 /* WHATSAPP */
 .whatsapp{
-  position:fixed;bottom:20px;right:20px;background:#25D366;color:white;
-  padding:15px 20px;border-radius:50px;font-weight:bold;text-decoration:none;z-index:2000;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:14px 22px;
+  border-radius:50px;
+  font-weight:bold;
+  text-decoration:none;
+  z-index:2000;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  transition: transform .3s;
 }
+
+.whatsapp:hover{
+  transform: scale(1.08);
+}
+
 
 /* RESPONSIVE */
 @media(max-width:768px){
@@ -214,6 +213,13 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
   -webkit-appearance:none;width:20px;height:20px;background:#fff;
   border:2px solid #d4af37;border-radius:50%;cursor:pointer;
   box-shadow:0 2px 5px rgba(0,0,0,.3);
+}
+.before-after-item{
+  margin-bottom:4rem;
+}
+
+.ba-container{
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 
 /* ANIMACIÓN SCROLL */
@@ -580,6 +586,7 @@ target="_blank">💬 WhatsApp</a>
 
 </body>
 </html>
+
 
 
 
