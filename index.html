@@ -6,19 +6,11 @@
 <title>LCM Lavado & Detailing | Ampuero</title>
 <meta name="description" content="LCM Lavado & Detailing en Ampuero, Cantabria. Detailing interior y exterior, pulido de faros y paquetes premium.">
 <meta name="keywords" content="detailing Ampuero, lavado coches Cantabria, detailing interior, detailing exterior">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Inter',sans-serif;
-  color:#333;
-  line-height:1.7;
-}
-
+body{font-family:Arial,sans-serif;color:#333;line-height:1.6;}
 .container{max-width:1200px;margin:auto;padding:0 20px;}
 
 /* HEADER */
@@ -57,54 +49,15 @@ nav a:hover{color:#d4af37;}
 }
 .hero h1{font-size:3rem;margin-bottom:1rem;}
 .hero p{font-size:1.2rem;max-width:600px;margin-bottom:2rem;}
-  .hero h1{
-  font-size:3.4rem;
-  font-weight:900;
-  letter-spacing:-1px;
-  text-shadow:0 5px 20px rgba(0,0,0,0.6);
+.hero .btn{
+  background:#d4af37;color:#111;padding:12px 30px;border-radius:30px;
+  font-weight:bold;text-decoration:none;transition: transform 0.3s;
 }
-.hero p{
-  font-size:1.25rem;
-  opacity:0.95;
-}
-.btn{
-  display:inline-block;
-  margin-top:1.5rem;
-  background:linear-gradient(135deg,#d4af37,#f1d97a);
-  color:#111;
-  padding:12px 32px;
-  border-radius:40px;
-  font-weight:700;
-  text-decoration:none;
-  letter-spacing:0.5px;
-  box-shadow:0 8px 20px rgba(212,175,55,0.4);
-  transition: all 0.3s ease;
-}
-
-.btn:hover{
-  transform: translateY(-2px) scale(1.04);
-  box-shadow:0 15px 35px rgba(212,175,55,0.6);
-}
+.hero .btn:hover{transform: scale(1.05);}
 
 /* SECTIONS */
 section{padding:5rem 0;}
-.section-title{
-  text-align:center;
-  font-size:2.4rem;
-  color:#111;
-  margin-bottom:3rem;
-  position:relative;
-}
-
-.section-title::after{
-  content:"";
-  display:block;
-  width:80px;
-  height:4px;
-  background:#d4af37;
-  margin:15px auto 0;
-  border-radius:5px;
-}
+.section-title{text-align:center;font-size:2.3rem;color:#111;margin-bottom:3rem;}
 
 /* SERVICES */
 .services{background:#f5f5f5}
@@ -114,22 +67,13 @@ section{padding:5rem 0;}
   gap:2rem;
 }
 .card{
-  background:white;
-  padding:2.5rem 2rem;
-  border-radius:16px;
-  box-shadow:0 15px 30px rgba(0,0,0,.12);
-  text-align:center;
-  transition: transform .3s ease, box-shadow .3s ease;
-}
-  .card p{
-  font-weight:400;
-  opacity:0.85;
-}
+  background:white;padding:2rem;border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);text-align:center;
+  transition: transform 0.3s, box-shadow 0.3s;
 
-.card:hover{
-  transform: translateY(-12px);
-  box-shadow:0 25px 50px rgba(0,0,0,.25);
 }
+.card:hover{transform: translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,0.3);}
+.price{color:#d4af37;font-size:1.4rem;font-weight:bold;margin-top:1rem;}
 
 /* CONTACT */
 .contact{background:#111;color:white;}
@@ -146,24 +90,9 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
 
 /* WHATSAPP */
 .whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:white;
-  padding:14px 22px;
-  border-radius:50px;
-  font-weight:bold;
-  text-decoration:none;
-  z-index:2000;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
-  transition: transform .3s;
+  position:fixed;bottom:20px;right:20px;background:#25D366;color:white;
+  padding:15px 20px;border-radius:50px;font-weight:bold;text-decoration:none;z-index:2000;
 }
-
-.whatsapp:hover{
-  transform: scale(1.08);
-}
-
 
 /* RESPONSIVE */
 @media(max-width:768px){
@@ -175,27 +104,10 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
 
 /* GALERÍA ANTES/DESPUÉS */
 .before-after-gallery{display:grid;gap:3rem;}
-.before-after-item h3{
-  font-size:1.4rem;
-  font-weight:700;
-  margin-bottom:1.2rem;
-  color:#111;
-}
-
+.before-after-item h3{text-align:center;margin-bottom:1rem;color:#1e3c72;}
 .ba-container{
   position: relative;width:100%;max-width:800px;margin:auto;overflow:hidden;
   border-radius:12px;height:400px;
-  .ba-container{
-  position: relative;
-  width:100%;
-  max-width:800px;
-  margin:auto;
-  overflow:hidden;
-  border-radius:20px;
-  height:400px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.25);
-}
-
 }
 .ba-container img{
   width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;
@@ -217,13 +129,6 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
   -webkit-appearance:none;width:20px;height:20px;background:#fff;
   border:2px solid #d4af37;border-radius:50%;cursor:pointer;
   box-shadow:0 2px 5px rgba(0,0,0,.3);
-}
-.before-after-item{
-  margin-bottom:4rem;
-}
-
-.ba-container{
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 
 /* ANIMACIÓN SCROLL */
@@ -277,17 +182,13 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
     margin-bottom: 20px;
   }
 
- .hero h1{
-  font-size:3.2rem;
-  margin-bottom:1.2rem;
-  font-weight:700;
-}
+  .hero h1 {
+    font-size: 1.8rem;
+  }
 
-.hero p{
-  font-size:1.15rem;
-  max-width:620px;
-  font-weight:400;
-}
+  .hero p {
+    font-size: 1rem;
+  }
 
   /* SECTIONS */
   section {
@@ -297,10 +198,6 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
   .section-title {
     font-size: 1.8rem;
   }
-h1,h2,h3{
-  font-family:'Poppins',sans-serif;
-  letter-spacing:-0.5px;
-}
 
   /* GALERÍA */
   .ba-container {
@@ -389,54 +286,7 @@ h1,h2,h3{
     color: white;
   }
 }
-section{
-  padding:6rem 0;
-}
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2rem;
-}
 
-.service-card{
-  background:white;
-  padding:2.2rem;
-  border-radius:14px;
-  text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-  transition:transform .3s, box-shadow .3s;
-}
-
-.service-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 45px rgba(0,0,0,0.25);
-}
-
-.service-card h3{
-  font-size:1.4rem;
-  margin-bottom:.5rem;
-}
-
-.service-card p{
-  color:#666;
-  margin-bottom:1rem;
-}
-
-.service-btn{
-  display:inline-block;
-  margin-top:1.2rem;
-  background:#d4af37;
-  color:#111;
-  padding:12px 26px;
-  border-radius:30px;
-  font-weight:bold;
-  text-decoration:none;
-  transition:transform .3s;
-}
-
-.service-btn:hover{
-  transform:scale(1.08);
-}
 </style>
 </head>
 
@@ -477,47 +327,18 @@ Resultados visibles desde el primer servicio.
 <section id="servicios" class="services fade-in">
   <div class="container">
     <h2 class="section-title">Servicios y Tarifas</h2>
-   <div class="grid services-grid">
-
-  <div class="service-card">
-    <h3>Interior Básico</h3>
-    <p>Sin tapicería</p>
-    <div class="price">50 € – 65 €</div>
-    <a href="https://wa.me/34681868292" class="service-btn">Solicitar por WhatsApp</a>
-  </div>
-
-  <div class="service-card">
-    <h3>Interior Completo</h3>
-    <p>Con tapicería</p>
-    <div class="price">70 € – 85 €</div>
-    <a href="https://wa.me/34681868292" class="service-btn">Solicitar por WhatsApp</a>
-  </div>
-
-  <div class="service-card">
-    <h3>Detallado Exterior</h3>
-    <div class="price">45 € – 60 €</div>
-    <a href="https://wa.me/34681868292" class="service-btn">Solicitar por WhatsApp</a>
-  </div>
-
-  <div class="service-card">
-    <h3>Pulido de Faros</h3>
-    <div class="price">40 € – 50 €</div>
-    <a href="https://wa.me/34681868292" class="service-btn">Solicitar por WhatsApp</a>
-  </div>
-
-  <div class="service-card">
-    <h3>Integral Básico</h3>
-    <p>Sin tapicería</p>
-    <div class="price">80 € – 95 €</div>
-    <a href="https://wa.me/34681868292" class="service-btn">Solicitar por WhatsApp</a>
-  </div>
-
-  <div class="service-card">
-    <h3>Integral Premium</h3>
-    <p>Con tapicería</p>
-    <div class="price">100 € – 120 €</div>
-    <a href="https://wa.me/34681868292" class="service-btn">Solicitar por WhatsApp</a>
+    <div class="grid">
+      <div class="card"><h3>Interior Básico</h3><p>(Sin tapicería)</p><div class="price">50 € – 65 €<a href="https://wa.me/34681868292?text=Hola%20👋%20Quiero%20información%20sobre%20el%20servicio%20de%20Interior%20Básico."
+   class="btn">
+Solicitar por WhatsApp
+</a>
 </div></div>
+      <div class="card"><h3>Interior Completo</h3><p>(Con tapicería)</p><div class="price">70 € – 85 €</div></div>
+      <div class="card"><h3>Detallado Exterior</h3><div class="price">45 € – 60 €</div></div>
+      <div class="card"><h3>Pulido de Faros</h3><div class="price">40 € – 50 €</div></div>
+      <div class="card"><h3>Integral Básico</h3><p>(Sin tapicería)</p><div class="price">80 € – 95 €</div></div>
+      <div class="card"><h3>Integral Premium</h3><p>(Con tapicería)</p><div class="price">100 € – 120 €</div></div>
+      <div class="card"><h3>Mantenimiento</h3><p>Cada 5 o 7 semanas</p><div class="price">60 € – 80 €</div></div>
     </div>
     <p style="margin-top:2rem;text-align:center;"><strong>Suplementos:</strong> Suciedad alta +10% | Suciedad extrema +20%</p>
   </div>
@@ -647,6 +468,8 @@ target="_blank">💬 WhatsApp</a>
 
 </body>
 </html>
+
+
 
 
 
