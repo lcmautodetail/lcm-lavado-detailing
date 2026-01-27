@@ -10,7 +10,8 @@
 <style>
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;color:#333;line-height:1.6;}
+body{font-family:Arial,sans-serif;color:#333;line-height:1.6;background:#fafafa;
+}
 .container{max-width:1200px;margin:auto;padding:0 20px;}
 
 /* HEADER */
@@ -49,15 +50,57 @@ nav a:hover{color:#d4af37;}
 }
 .hero h1{font-size:3rem;margin-bottom:1rem;}
 .hero p{font-size:1.2rem;max-width:600px;margin-bottom:2rem;}
-.hero .btn{
-  background:#d4af37;color:#111;padding:12px 30px;border-radius:30px;
-  font-weight:bold;text-decoration:none;transition: transform 0.3s;
+  .hero h1{
+  font-size:3.4rem;
+  font-weight:900;
+  letter-spacing:-1px;
+  text-shadow:0 5px 20px rgba(0,0,0,0.6);
 }
-.hero .btn:hover{transform: scale(1.05);}
+
+.hero p{
+  font-size:1.25rem;
+  opacity:0.95;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:1.5rem;
+  background:linear-gradient(135deg,#d4af37,#f1d97a);
+  color:#111;
+  padding:12px 32px;
+  border-radius:40px;
+  font-weight:700;
+  text-decoration:none;
+  letter-spacing:0.5px;
+  box-shadow:0 8px 20px rgba(212,175,55,0.4);
+  transition: all 0.3s ease;
+}
+
+.btn:hover{
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:0 15px 35px rgba(212,175,55,0.6);
+}
 
 /* SECTIONS */
 section{padding:5rem 0;}
-.section-title{text-align:center;font-size:2.3rem;color:#111;margin-bottom:3rem;}
+.section-title{
+  text-align:center;
+  font-size:2.6rem;
+  font-weight:800;
+  color:#111;
+  margin-bottom:3.5rem;
+  position:relative;
+}
+
+.section-title::after{
+  content:"";
+  display:block;
+  width:80px;
+  height:4px;
+  background:#d4af37;
+  margin:15px auto 0;
+  border-radius:2px;
+}
 
 /* SERVICES */
 .services{background:#f5f5f5}
@@ -128,9 +171,16 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
 .before-after-gallery{display:grid;gap:3rem;}
 .before-after-item h3{text-align:center;margin-bottom:1rem;color:#1e3c72;}
 .ba-container{
-  position: relative;width:100%;max-width:800px;margin:auto;overflow:hidden;
-  border-radius:12px;height:400px;
+  position: relative;
+  width:100%;
+  max-width:800px;
+  margin:auto;
+  overflow:hidden;
+  border-radius:20px;
+  height:400px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
 }
+
 .ba-container img{
   width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;
   transition: transform 0.5s ease;
@@ -151,6 +201,12 @@ footer{background:#000;color:white;text-align:center;padding:1.5rem;}
   -webkit-appearance:none;width:20px;height:20px;background:#fff;
   border:2px solid #d4af37;border-radius:50%;cursor:pointer;
   box-shadow:0 2px 5px rgba(0,0,0,.3);
+}
+.before-after-item h3{
+  font-size:1.4rem;
+  font-weight:700;
+  margin-bottom:1.2rem;
+  color:#111;
 }
 
 /* ANIMACIÓN SCROLL */
@@ -514,6 +570,7 @@ target="_blank">💬 WhatsApp</a>
 
 </body>
 </html>
+
 
 
 
