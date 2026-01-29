@@ -482,6 +482,26 @@ footer {
     font-size: 0.9rem;
   }
 }
+   .review-float{
+  position: fixed;
+  bottom: 100px; /* un poco por encima del WhatsApp */
+  right: 20px;
+  background: linear-gradient(135deg,#fbbc04,#f1d97a);
+  color:#111;
+  padding:12px 18px;
+  border-radius:50px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  z-index:999;
+  transition:all .3s ease;
+  font-size:14px;
+}
+
+.review-float:hover{
+  transform:translateY(-3px) scale(1.05);
+}
+
 </style>
 </head>
 
@@ -684,9 +704,16 @@ target="_blank">💬 WhatsApp</a>
     });
   });
 </script>
+<!-- BOTÓN FLOTANTE RESEÑAS -->
+<a href="TU_ENLACE_DE_RESEÑA_DE_GOOGLE"
+   target="_blank"
+   class="review-float">
+   ⭐ Reseña
+</a>
 
 </body>
 </html>
+
 
 
 
