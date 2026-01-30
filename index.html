@@ -501,6 +501,42 @@ footer {
 .review-float:hover{
   transform:translateY(-3px) scale(1.05);
 }
+/* =====================
+   RESEÑAS
+===================== */
+.reviews {
+  background: #f5f5f5;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.review-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+.review-text {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.review-author {
+  font-weight: bold;
+  color: #d4af37;
+  text-align: right;
+}
 
 </style>
 </head>
@@ -618,12 +654,45 @@ Transformaciones visibles en cada vehículo. Desliza para ver el cambio.
   </div>
 </section>
 <!-- RESEÑAS -->
-<section id="reseñas" class="fade-in">
+<section id="reseñas" class="fade-in reviews">
   <div class="container">
     <h2 class="section-title">Opiniones de nuestros clientes</h2>
 
-    <!-- Google Reviews Widget -->
-   <div class="elfsight-app-989e92a6-b155-4562-a578-05deaf0a2fc1"></div>
+    <div class="reviews-grid">
+
+      <!-- Reseña 1 -->
+      <div class="review-card">
+        <p class="review-text">
+          ⭐⭐⭐⭐⭐<br>
+         Trabaja súper bien, y muy rápido.
+Me ha dejado el coche por dentro como nuevo.
+Super contenta
+        </p>
+        <p class="review-author">— Elena C.</p>
+      </div>
+
+      <!-- Reseña 2 -->
+      <div class="review-card">
+        <p class="review-text">
+          ⭐⭐⭐⭐⭐<br>
+         🔝👏👌
+Perfecto!
+        </p>
+        <p class="review-author">— Raquel D.</p>
+      </div>
+       
+ <!-- Reseña 2 -->
+      <div class="review-card">
+        <p class="review-text">
+          ⭐⭐⭐⭐⭐<br>
+          Muy contento con el resultado. Merece mucho la pena. Lo recomiendo sin duda
+        </p>
+        <p class="review-author">— Raúl S.</p>
+      </div>
+     
+    </div>
+  </div>
+</section>
 
   </div>
 </section>
@@ -720,10 +789,10 @@ target="_blank">💬 WhatsApp</a>
    class="review-float">
    ⭐ Reseña
 </a>
-<script src="https://elfsightcdn.com/platform.js" async></script>
 
 </body>
 </html>
+
 
 
 
