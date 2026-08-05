@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lcmautodetail.github.io/lcm-lavado-detailing/sitemap.xml
