@@ -1,1 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Limpieza interior de coche en Ampuero | LCM Lavado & Detailing</title>
+
+  <meta name="description" content="Limpieza interior de coches en Ampuero, Cantabria. Aspirado, plásticos, cristales y limpieza de tapicerías con servicio profesional y cita previa.">
+
+  <link rel="canonical" href="https://lcmautodetail.github.io/lcm-lavado-detailing/limpieza-interior-coche-ampuero/">
+
+  <meta property="og:title" content="Limpieza interior de coche en Ampuero | LCM Lavado & Detailing">
+  <meta property="og:description" content="Servicio profesional de limpieza interior de coches en Ampuero, Cantabria.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lcmautodetail.github.io/lcm-lavado-detailing/limpieza-interior-coche-ampuero/">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem 1.2rem;
+    }
+
+    h1, h2 {
+      color: #d4af37;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-top: 2.5rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #181818;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 1.5rem 0;
+      color: #d4af37;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #d4af37;
+      color: #111;
+      text-decoration: none;
+      padding: 0.9rem 1.4rem;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      color: #d4af37;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #0a0a0a;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="container">
+
+      <a class="back" href="/lcm-lavado-detailing/">
+        ← Volver a LCM Lavado & Detailing
+      </a>
+
+      <h1>Limpieza interior de coche en Ampuero</h1>
+
+      <p>
+        Servicio profesional de limpieza interior para recuperar el aspecto,
+        la limpieza y el confort del habitáculo de tu vehículo.
+      </p>
+
+      <div class="price">
+        Desde 95 €
+      </div>
+
+      <a href="https://wa.me/34681868292?text=Hola%20👋%20Quiero%20información%20sobre%20la%20limpieza%20interior%20completa%20de%20mi%20vehículo."
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn">
+        💬 Pedir presupuesto por WhatsApp
+      </a>
+
+    </div>
+  </section>
+
+
+  <main class="container">
+
+    <h2>¿Qué incluye la limpieza interior completa?</h2>
+
+    <p>
+      La limpieza interior completa está pensada para vehículos que necesitan
+      una limpieza más profunda que un mantenimiento básico.
+    </p>
+
+    <ul>
+      <li>Aspirado completo del habitáculo</li>
+      <li>Limpieza de salpicadero y plásticos</li>
+      <li>Limpieza de huecos y zonas de difícil acceso</li>
+      <li>Limpieza de cristales interiores</li>
+      <li>Limpieza de asientos y tapicerías</li>
+      <li>Tratamiento adaptado al estado y material de cada superficie</li>
+    </ul>
+
+
+    <h2>¿Cuándo recomendamos este servicio?</h2>
+
+    <p>
+      Es una buena opción cuando el vehículo presenta manchas, suciedad acumulada,
+      polvo incrustado o cuando quieres recuperar un interior que lleva tiempo
+      sin recibir una limpieza profunda.
+    </p>
+
+
+    <h2>Limpieza interior profesional en Ampuero</h2>
+
+    <p>
+      En LCM Lavado & Detailing realizamos limpiezas interiores de vehículos
+      en Ampuero, Cantabria y alrededores, siempre con cita previa y valorando
+      el estado del vehículo antes de confirmar el presupuesto final.
+    </p>
+
+
+    <h2>Precio</h2>
+
+    <p>
+      El servicio de Interior Completo tiene un precio desde <strong>95 €</strong>.
+      El presupuesto puede variar en función del tamaño del vehículo,
+      nivel de suciedad, manchas, pelos de mascota u otras necesidades específicas.
+    </p>
+
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="https://wa.me/34681868292?text=Hola%20👋%20Quiero%20pedir%20presupuesto%20para%20una%20limpieza%20interior%20completa."
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn">
+        Solicitar presupuesto
+      </a>
+    </div>
+
+  </main>
+
+
+  <footer>
+    © 2026 LCM Lavado & Detailing · Ampuero, Cantabria
+  </footer>
+
+</body>
+</html>
