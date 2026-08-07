@@ -30,5 +30,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+  
+<url>
+  <loc>https://lcmautodetail.github.io/lcm-lavado-detailing/eliminacion-olores-coche-ampuero.html</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 </urlset>
