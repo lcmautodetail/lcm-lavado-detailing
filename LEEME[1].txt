@@ -1,0 +1,9 @@
+LCM Lavado & Detailing - Actualización del panel privado
+
+1. En GitHub, sustituye admin.html y admin-online.js por los incluidos.
+2. Espera a que GitHub Pages publique los cambios y recarga admin.html con Ctrl+F5.
+3. Comprueba las tarjetas de citas de hoy, pendientes, semana e importe previsto.
+
+No requiere SQL. No modifica reservas, precios ni políticas de Supabase.
+El importe previsto suma presupuestos de citas confirmadas, NO dinero cobrado.
+Las reservas completadas tampoco son prueba de pago. Para controlar ingresos reales se necesita un registro de cobros independiente.
