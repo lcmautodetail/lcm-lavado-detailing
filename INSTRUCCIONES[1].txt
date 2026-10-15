@@ -1,0 +1,8 @@
+WEB RENOVADA LCM
+
+Se conserva la web original, fotos, páginas de servicio y SEO.
+Se ha añadido reservar.html: formulario que prepara una solicitud de WhatsApp (sin backend).
+
+Para publicar: extraer este ZIP y subir TODOS los archivos a la raíz del repositorio GitHub Pages, conservando carpetas.
+No se ha publicado ni se ha conectado una base de datos. No existe disponibilidad real ni panel sincronizado en esta entrega.
+Revisar precios, reseñas, privacidad y probar formulario antes de publicar.
