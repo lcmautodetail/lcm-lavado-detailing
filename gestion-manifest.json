@@ -1,0 +1,18 @@
+{
+  "name": "LCM Gestión · Lavado & Detailing",
+  "short_name": "LCM Gestión",
+  "start_url": "./gestion.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111318",
+  "theme_color": "#111318",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "./gestion-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
