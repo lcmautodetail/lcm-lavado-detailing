@@ -3,14 +3,16 @@
 const $=id=>document.getElementById(id), db=()=>window.LCM_DB?.client;
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const euros=x=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(Number(x)||0);
-let clients=[],vehicles=[],jobs=[],loaded=false;
+let clients=[],vehicles=[],jobs=[],history=[],loaded=false;
 const msg=s=>{$('jobMessage').textContent=s};
 let bookingDraft=null;
 async function load(){if($('app')?.style.display==='none')return;msg('Cargando trabajos…');try{
- const [c,v,j]=await Promise.all([db().from('lcm_clients').select('id,name,phone').order('name'),db().from('lcm_vehicles').select('id,client_id,vehicle,plate').order('vehicle'),db().from('lcm_work_orders').select('*').order('work_date',{ascending:false}).limit(1000)]);
- for(const r of [c,v,j])if(r.error)throw r.error;clients=c.data||[];vehicles=v.data||[];jobs=j.data||[];loaded=true;render();msg(`${jobs.length} trabajos nuevos registrados. El historial importado se consulta en Clientes.`);
+ const [c,v,j,h]=await Promise.all([db().from('lcm_clients').select('id,name,phone').order('name'),db().from('lcm_vehicles').select('id,client_id,vehicle,plate').order('vehicle'),db().from('lcm_work_orders').select('*').order('work_date',{ascending:false}).limit(1000),db().from('lcm_job_history').select('import_key,client_id,vehicle_id,service,appointment_at,original_price,real_income,original_status,original_payment_status,is_internal').order('appointment_at',{ascending:false}).limit(1000)]);
+ for(const r of [c,v,j,h])if(r.error)throw r.error;clients=c.data||[];vehicles=v.data||[];jobs=j.data||[];history=h.data||[];loaded=true;render();msg(`${jobs.length} trabajos operativos · ${history.length} trabajos históricos importados (solo lectura).`);
  }catch(e){msg('Error al cargar trabajos: '+e.message)}}
 function render(){ $('jobRows').innerHTML=jobs.map(j=>{const c=clients.find(x=>x.id===j.client_id),v=vehicles.find(x=>x.id===j.vehicle_id);return `<tr><td>${esc(j.work_date)}</td><td>${esc(c?.name||'—')}<br><small>${esc(v?.vehicle||'—')} ${esc(v?.plate||'')}</small></td><td>${esc(j.service)}</td><td>${esc(j.work_status.replace('_',' '))}</td><td>${j.payment_status==='interno'?'Interno · 0 €':`${esc(j.payment_status)} · ${euros(j.amount_paid)} / ${euros(j.agreed_price)}`}</td><td><button type="button" data-job="${esc(j.id)}">Editar</button></td></tr>`}).join('')||'<tr><td colspan="6">Todavía no hay trabajos nuevos.</td></tr>';
+ const historyRows=history.map(j=>{const cl=clients.find(x=>x.id===j.client_id),v=vehicles.find(x=>x.id===j.vehicle_id);return `<tr><td>${esc(String(j.appointment_at||'').replace('T',' ').slice(0,16))}</td><td>${esc(cl?.name||'—')}<br><small>${esc(v?.vehicle||'—')}</small></td><td>${esc(j.service)}</td><td>${esc(j.original_status)} · histórico</td><td>${j.is_internal?'Interno · 0 €':`${esc(j.original_payment_status)} · ${euros(j.real_income)} / ${euros(j.original_price)}`}</td><td><small>Importado · solo lectura</small></td></tr>`}).join('');
+ if(historyRows){const tbody=$('jobRows');if(!jobs.length)tbody.innerHTML='';tbody.insertAdjacentHTML('beforeend',historyRows)}
  $('jobRows').querySelectorAll('[data-job]').forEach(b=>b.onclick=()=>edit(jobs.find(j=>j.id===b.dataset.job)));
 }
 function clientOptions(id){$('jobClient').innerHTML='<option value="">Selecciona cliente</option>'+clients.map(c=>`<option value="${esc(c.id)}">${esc(c.name)} · ${esc(c.phone)}</option>`).join('');$('jobClient').value=id||'';vehicleOptions();}
