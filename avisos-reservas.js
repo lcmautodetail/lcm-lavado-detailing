@@ -17,7 +17,7 @@
  if(known!==null){const news=pending.filter(x=>!known.has(String(x.id)));if(news.length){$('lcmAvisosEstado').textContent=`${news.length} nueva(s) solicitud(es) recibida(s).`;
  if('Notification' in window&&Notification.permission==='granted'){
  const n=new Notification('LCM · Nueva reserva online',{body:news.length===1?`${news[0].client_name||'Cliente'} · ${news[0].service_name||'Servicio'} · ${news[0].booking_date||''}`:`${news.length} solicitudes pendientes de revisar`,tag:'lcm-reservas'});n.onclick=()=>{window.focus();$('bookings')?.scrollIntoView({behavior:'smooth'});n.close()};}
- if(typeof window.refresh==='function')await window.refresh();}
+ $('refresh')?.click();}
  }else{$('lcmAvisosEstado').textContent=`${pending.length} solicitud(es) pendiente(s). Avisos activos mientras esta página esté abierta.`}
  known=ids;
  }catch(e){if($('lcmAvisosEstado'))$('lcmAvisosEstado').textContent='No se han podido comprobar las reservas. Revisa tu conexión.'}finally{busy=false}}
