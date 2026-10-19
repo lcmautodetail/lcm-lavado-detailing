@@ -1,24 +1,38 @@
-// LCM Gestión 2.0 — navegación de agenda y accesibilidad, sin mutaciones de datos.
+/* LCM Gestión · Agenda semanal, presupuestos y comunicación. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const localToday=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-function addDays(iso,days){const d=new Date(iso+'T12:00:00Z');if(Number.isNaN(d.getTime()))return localToday();d.setUTCDate(d.getUTCDate()+days);return d.toISOString().slice(0,10)}
-function readable(iso){return new Intl.DateTimeFormat('es-ES',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(iso+'T12:00:00Z'))}
-function start(){
- const filter=$('filterDate'),clear=$('clearDate'),agenda=$('agenda');if(!filter||!clear||!agenda)return;
- const controls=document.createElement('div');controls.className='v2-datebar';controls.setAttribute('aria-label','Navegación de agenda');
- const prev=document.createElement('button'),today=document.createElement('button'),next=document.createElement('button'),current=document.createElement('span');
- prev.type=next.type=today.type='button';prev.textContent='← Anterior';today.textContent='Hoy';next.textContent='Siguiente →';current.className='v2-current';
- prev.setAttribute('aria-label','Día anterior');next.setAttribute('aria-label','Día siguiente');
- controls.append(prev,today,next,current);
- const dateRow=filter.closest('.row');if(dateRow)dateRow.insertAdjacentElement('afterend',controls);
- const update=()=>{current.textContent=filter.value?readable(filter.value):'Todas las fechas';prev.disabled=next.disabled=false};
- function setDate(value){filter.value=value;filter.dispatchEvent(new Event('change',{bubbles:true}));update()}
- prev.addEventListener('click',()=>setDate(addDays(filter.value||localToday(),-1)));
- next.addEventListener('click',()=>setDate(addDays(filter.value||localToday(),1)));
- today.addEventListener('click',()=>setDate(localToday()));
- filter.addEventListener('change',update);clear.addEventListener('click',()=>requestAnimationFrame(update));update();
- const style=document.createElement('style');style.textContent='.v2-datebar{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:10px 0 18px}.v2-datebar button{font-size:12px;min-height:42px;padding:8px}.v2-current{font-size:12px;text-align:center;color:#e9cb83;font-weight:700;min-width:90px}@media(max-width:370px){.v2-datebar{grid-template-columns:1fr 1fr}.v2-current{grid-column:1/-1;grid-row:1}.v2-datebar button:nth-child(2){grid-row:3;grid-column:1/-1}}';document.head.append(style);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const plus=(iso,n)=>{const d=new Date(iso+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
+const monday=iso=>plus(iso,-((new Date(iso+'T12:00:00Z').getUTCDay()+6)%7));
+const cancelled=b=>['cancelada','cancelado','anulada','anulado'].includes(String(b.status).toLowerCase());
+const pending=b=>['pendiente','solicitada'].includes(String(b.status).toLowerCase());
+const euro=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(Number(n)||0);
+const readable=iso=>new Intl.DateTimeFormat('es-ES',{weekday:'long',day:'numeric',month:'long',timeZone:'UTC'}).format(new Date(iso+'T12:00:00Z'));
+const phone=p=>{const d=String(p||'').replace(/\D/g,'');return d.length===9?'34'+d:d};
+const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+window.LCM_V2_UTILS={plus,monday,cancelled,pending,phone,normalize};
+let week=monday(today()),status='all',contact=null,catalog=[],quoteSerial=0,catalogLoaded=false;
+const state=()=>window.LCM_VIEW||{bookings:[],services:[],movements:[]};
+function match(b){const q=normalize($('bookingSearch').value);return (!q||normalize([b.client_name,b.vehicle,b.plate,b.phone,b.service_name].join(' ')).includes(q))&&(status==='all'||status==='pending'&&pending(b)||status==='active'&&!cancelled(b)&&b.booking_date>=today()||status==='cancelled'&&cancelled(b))}
+function drawWeek(){const rows=state().bookings;$('weekTitle').textContent=new Intl.DateTimeFormat('es-ES',{month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(week+'T12:00:00Z'));$('weekStrip').innerHTML=Array.from({length:7},(_,i)=>{const d=plus(week,i),count=rows.filter(b=>b.booking_date===d&&!cancelled(b)).length;return '<button type="button" data-day="'+d+'" class="week-day '+(d===$('filterDate').value?'selected ':'')+(d===today()?'is-today':'')+'" aria-pressed="'+(d===$('filterDate').value)+'"><small>'+['L','M','X','J','V','S','D'][i]+'</small><strong>'+Number(d.slice(-2))+'</strong><span>'+ (count?count+' cita'+(count===1?'':'s'):'—')+'</span></button>'}).join('');$('weekStrip').querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>selectDate(b.dataset.day))}
+function selectDate(d){$('filterDate').value=d;week=monday(d);$('filterDate').dispatchEvent(new Event('change'));draw()}
+function draw(){if(!window.LCM_VIEW)return;drawWeek();let count=0;document.querySelectorAll('#bookings [data-agenda-id]').forEach(el=>{const b=state().bookings.find(x=>x.id===el.dataset.agendaId),ok=b&&match(b);el.hidden=!ok;if(ok)count++});$('agendaSummary').textContent=count+' cita'+(count===1?'':'s')+($('filterDate').value?' · '+readable($('filterDate').value):' · todas las fechas');
+ const rows=state().bookings,month=today().slice(0,7),incomes=state().movements.filter(m=>m.kind==='ingreso'&&String(m.movement_date).startsWith(month)).reduce((n,m)=>n+Number(m.amount||0),0),next=rows.filter(b=>!cancelled(b)&&b.booking_date>=today()).sort((a,b)=>(a.booking_date+a.booking_time).localeCompare(b.booking_date+b.booking_time))[0];
+ $('v2Summary').innerHTML='<div class="summary-tile"><small>COBROS DEL MES</small><strong>'+(state().movementsComplete?euro(incomes):'Consultar economía')+'</strong></div><div class="summary-tile"><small>PRÓXIMO VEHÍCULO</small><strong>'+esc(next?.vehicle||'Agenda libre')+'</strong><span>'+esc(next?next.booking_date+' · '+String(next.booking_time).slice(0,5):'Añade tu próxima cita')+'</span></div>';
+ $('todayLabel').textContent=readable(today()).toUpperCase();
+ document.querySelectorAll('[data-agenda-id] a[href^="https://wa.me/"]').forEach(a=>{a.textContent='WhatsApp ↗';a.onclick=e=>{const b=rows.find(x=>x.id===a.closest('[data-agenda-id]').dataset.agendaId);if(!b)return;e.preventDefault();contact=b;$('contactName').textContent=b.client_name+' · '+b.vehicle;$('contactTemplate').value='general';message();$('contactDialog').showModal()}});
+ const selected=$('quoteService').value;$('quoteService').innerHTML=state().services.map(s=>'<option value="'+esc(s.name)+'">'+esc(s.name)+'</option>').join('');if(selected)$('quoteService').value=selected;
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+function message(){if(!contact)return;const b=contact,hello='Hola '+b.client_name+' 👋, somos LCM Lavado & Detailing. ',when=readable(b.booking_date)+' a las '+String(b.booking_time).slice(0,5);const texts={general:hello+'Te escribo por tu '+b.vehicle+'.',confirm:hello+'Te confirmamos tu cita del '+when+' para '+b.service_name+' en tu '+b.vehicle+'. ¡Te esperamos!',remind:hello+'Te recordamos tu cita del '+when+' para '+b.service_name+'. Si necesitas cambiarla, avísanos.',ready:hello+'Tu '+b.vehicle+' ya está listo para recoger. ¡Gracias por confiar en nosotros!',review:hello+'¡Gracias por traer tu '+b.vehicle+'! Si estás contento con el resultado, nos ayudaría mucho que dejaras una reseña en Google.'};$('contactText').value=texts[$('contactTemplate').value];link()}
+function link(){$('contactLink').href='https://wa.me/'+phone(contact?.phone)+'?text='+encodeURIComponent($('contactText').value)}
+async function loadCatalog(){if(catalogLoaded)return;try{let offset=0,all=[];for(;;){const {data,error}=await window.LCM_DB.client.from('vehicle_models').select('brand,model,size').order('brand').order('model').range(offset,offset+999);if(error)throw error;all.push(...(data||[]));if(!data||data.length<1000)break;offset+=1000}catalog=all;catalogLoaded=true;$('quoteBrand').innerHTML='<option value="">Selecciona marca</option>'+[...new Set(catalog.map(x=>x.brand))].map(b=>'<option>'+esc(b)+'</option>').join('');models()}catch(e){$('quoteResult').textContent='No se pudo cargar el catálogo: '+e.message}}
+function models(){quoteSerial++;$('quoteResult').textContent='';$('quoteModel').innerHTML='<option value="">Selecciona modelo</option>'+catalog.filter(v=>v.brand===$('quoteBrand').value).map(v=>'<option>'+esc(v.model)+'</option>').join('')}
+$('openQuote').onclick=()=>{$('quotePanel').classList.remove('hidden');loadCatalog();$('quotePanel').scrollIntoView({behavior:'smooth'})};$('closeQuote').onclick=()=>$('quotePanel').classList.add('hidden');$('openAgenda').onclick=()=>{window.LCM_UI.show('agenda');selectDate(today())};
+$('weekPrev').onclick=()=>selectDate(plus(week,-7));$('weekNext').onclick=()=>selectDate(plus(week,7));$('weekToday').onclick=()=>selectDate(today());$('filterDate').addEventListener('change',()=>{if($('filterDate').value)week=monday($('filterDate').value);queueMicrotask(draw)});$('clearDate').addEventListener('click',()=>queueMicrotask(draw));$('bookingSearch').oninput=draw;
+document.querySelectorAll('[data-status]').forEach(b=>b.onclick=()=>{status=b.dataset.status;document.querySelectorAll('[data-status]').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b))});draw()});
+$('closeContact').onclick=()=>$('contactDialog').close();$('contactTemplate').onchange=message;$('contactText').oninput=link;$('quoteBrand').onchange=models;
+for(const id of ['quoteModel','quoteService','quoteDirt'])$(id).addEventListener('change',()=>{quoteSerial++;$('quoteResult').textContent=''})
+$('quoteForm').onsubmit=async e=>{e.preventDefault();const serial=++quoteSerial,button=$('quoteForm').querySelector('button');button.disabled=true;$('quoteResult').textContent='Calculando…';try{const {data,error}=await window.LCM_DB.client.rpc('lcm_quote',{p_brand:$('quoteBrand').value,p_model:$('quoteModel').value,p_service:$('quoteService').value,p_dirt:$('quoteDirt').value,p_size:null});if(error)throw error;if(serial!==quoteSerial)return;const q=Array.isArray(data)?data[0]:data;if(!q)throw Error('No hay tarifa para esta combinación.');$('quoteResult').innerHTML='<div class="quote-price">'+(q.quoted_price==null?'Revisar presupuesto':euro(q.quoted_price))+'</div><p>'+esc(q.vehicle_size||'Tamaño por confirmar')+' · '+esc(q.needs_review?'Necesita revisión antes de confirmar el precio.':'Estimación orientativa. Confirma el estado del vehículo.')+'</p>'}catch(e){if(serial===quoteSerial)$('quoteResult').textContent='No se pudo calcular: '+e.message}finally{button.disabled=false}};
+window.addEventListener('lcm-view-data',()=>queueMicrotask(draw));window.addEventListener('lcm-view-change',()=>queueMicrotask(draw));
 })();
