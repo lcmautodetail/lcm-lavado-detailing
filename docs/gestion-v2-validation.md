@@ -28,7 +28,7 @@ Migraciones de Supabase `lcm_shared_service_timer` y `lcm_private_work_photos` e
 - Inicio de sesión real en iPhone y Android.
 - Inicio y pausa desde teléfonos distintos, y recuperación tras cerrar la app.
 - Seleccionar fotos de la galería, subir una foto y abrir su versión ampliada; compatibilidad HEIC depende del navegador y se muestra error si no puede decodificarse.
-- Notificaciones push: aún NO implementadas ni habilitadas. La configuración del servidor de envío quedó bloqueada por revisión de aprobación; no se ha intentado eludir ese bloqueo.
+- Notificaciones push: servidor lcm-push desplegado tras autorización expresa del usuario. Activar cada móvil y probar la recepción real; sin suscripción y permiso del teléfono no hay entrega. El calendario por suscripción se encuentra preparado en código, pero su despliegue quedó bloqueado por revisión de autorización de compartir datos con Google y Apple.
 - El cronómetro no funciona sin red. No se reemplaza silenciosamente por otro local.
 
 ## Transición
