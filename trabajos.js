@@ -57,6 +57,7 @@ $('jobForm')?.addEventListener('submit',async e=>{e.preventDefault();const id=$(
  const payload={booking_id,client_id,vehicle_id,work_date:$('jobDate').value,service:$('jobService').value.trim(),work_status:$('jobStatus').value,payment_status,agreed_price,amount_paid,notes:$('jobNotes').value.trim()};
  try{const r=id?await db().from('lcm_work_orders').update(payload).eq('id',id):await db().from('lcm_work_orders').insert(payload);if(r.error)throw r.error;$('jobEditor').style.display='none';bookingDraft=null;await load();msg('Trabajo guardado. No se ha creado ningún ingreso contable.');}catch(err){msg('No se pudo guardar: '+err.message)}
 });
+window.addEventListener('lcm-authenticated',load);window.addEventListener('lcm-data-refresh',load);
 const observer=new MutationObserver(()=>{if($('app')?.style.display==='block'&&!loaded)load();if($('app')?.style.display==='none'){loaded=false;$('jobEditor').style.display='none';}});
 if($('app'))observer.observe($('app'),{attributes:true,attributeFilter:['style']});if($('app')?.style.display==='block')load();
 })();

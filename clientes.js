@@ -42,6 +42,7 @@ function detail(){
  const v=vs.find(v=>v.id===j.vehicle_id);
  return `<tr><td>${esc(String(j.appointment_at).replace('T',' ').slice(0,16))}</td><td>${esc(v?.vehicle||'—')}</td><td>${esc(j.service)}${j.is_internal?' <span class="history-internal">(interno)</span>':''}</td><td>${esc(j.original_status)}<br><small class="muted">${esc(j.original_payment_status)}</small></td><td>${money(j.original_price)}</td><td>${j.is_internal?'0 € · interno':money(j.real_income)}</td></tr>`;
  }).join('')||'<tr><td colspan="6">Sin trabajos</td></tr>'}</tbody></table></div><p class="muted">El historial importado no genera ingresos nuevos.</p>`;
+ const phoneDigits=norm(c.phone);if(phoneDigits){const link=document.createElement('a');link.textContent='WhatsApp';link.href='https://wa.me/'+(phoneDigits.length===9?'34'+phoneDigits:phoneDigits);link.target='_blank';link.rel='noopener';link.className='smallbtn';el.querySelector('.actions').appendChild(link)}
  $('closeClient').onclick=()=>{selected=null;el.style.display='none'};
  $('editClient').onclick=()=>openClient(c);
  $('addVehicleForClient').onclick=()=>openVehicle(null,c.id);
@@ -88,6 +89,7 @@ $('vehicleForm')?.addEventListener('submit',async e=>{
   if(r.error)throw r.error;selected=client_id;$('vehicleEditor').style.display='none';await load();msg('Vehículo guardado correctamente.');
  }catch(err){msg('No se pudo guardar el vehículo: '+err.message)}
 });
+window.addEventListener('lcm-authenticated',load);window.addEventListener('lcm-data-refresh',load);
 const observer=new MutationObserver(()=>{if($('app')?.style.display==='block'&&!loaded)load();if($('app')?.style.display==='none'){$('clientDetail').style.display='none';$('clientEditor').style.display='none';$('vehicleEditor').style.display='none';selected=null;loaded=false}});
 if($('app'))observer.observe($('app'),{attributes:true,attributeFilter:['style']});
 if($('app')?.style.display==='block')load();
