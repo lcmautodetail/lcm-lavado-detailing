@@ -75,7 +75,7 @@ $('clientForm')?.addEventListener('submit',async e=>{
  const db=window.LCM_DB.client;
  try{
   const r=id?await db.from('lcm_clients').update({name,phone}).eq('id',id).select('id').single():await db.from('lcm_clients').insert({name,phone}).select('id').single();
-  if(r.error)throw r.error;selected=r.data.id;$('clientEditor').style.display='none';await load();msg('Cliente guardado correctamente.');
+  if(r.error)throw r.error;selected=r.data.id;$('clientEditor').style.display='none';await load();msg('Cliente guardado correctamente.');window.dispatchEvent(new Event('lcm-records-changed'));
  }catch(err){msg('No se pudo guardar el cliente: '+err.message)}
 });
 $('vehicleForm')?.addEventListener('submit',async e=>{
@@ -86,7 +86,7 @@ $('vehicleForm')?.addEventListener('submit',async e=>{
  try{
   const db=window.LCM_DB.client;
   const r=id?await db.from('lcm_vehicles').update({client_id,vehicle,plate}).eq('id',id).select('id').single():await db.from('lcm_vehicles').insert({client_id,vehicle,plate}).select('id').single();
-  if(r.error)throw r.error;selected=client_id;$('vehicleEditor').style.display='none';await load();msg('Vehículo guardado correctamente.');
+  if(r.error)throw r.error;selected=client_id;$('vehicleEditor').style.display='none';await load();msg('Vehículo guardado correctamente.');window.dispatchEvent(new Event('lcm-records-changed'));
  }catch(err){msg('No se pudo guardar el vehículo: '+err.message)}
 });
 window.addEventListener('lcm-authenticated',load);window.addEventListener('lcm-data-refresh',load);

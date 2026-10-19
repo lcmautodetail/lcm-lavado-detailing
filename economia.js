@@ -42,7 +42,7 @@
   if(income){payload.client_name=el('incomeClient').value.trim();payload.document_status=el('incomeDoc').value;payload.hours_worked=el('incomeHours').value===''?null:amount('incomeHours');}
   else payload.category=el('expenseCategory').value;
   const {error}=await client().from('economic_movements').insert(payload);if(error)throw error;
-  el(prefix+'Form').reset();el(prefix+'Date').value=localDate();el('ecoMonth').value=payload.movement_date.slice(0,7);await load();status('Movimiento guardado correctamente');
+  el(prefix+'Form').reset();el(prefix+'Date').value=localDate();el('ecoMonth').value=payload.movement_date.slice(0,7);await load();status('Movimiento guardado correctamente');window.dispatchEvent(new Event('lcm-records-changed'));
  }
  function exportCsv(){
   const fields=['movement_date','kind','concept','client_name','category','amount','payment_method','document_status','hours_worked','notes'];
