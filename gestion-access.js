@@ -1,7 +1,7 @@
 /* Se ejecuta antes de cargar dependencias: el acceso nunca falla en silencio. */
 (()=>{'use strict';
 const form=document.getElementById('loginForm'),message=document.getElementById('msg');
-const report=text=>{if(message)message.textContent=text};
+const report=text=>{if(message)message.textContent=text;const feedback=document.getElementById('loginFeedback');if(feedback)feedback.textContent=text};
 window.LCM_LOGIN_READY=false;
 report('Preparando acceso seguro…');
 form.addEventListener('submit',event=>{if(!window.LCM_LOGIN_READY){event.preventDefault();event.stopImmediatePropagation();report('La conexión todavía no se ha cargado. Espera unos segundos o pulsa Recargar acceso.')}},true);
