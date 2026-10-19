@@ -29,6 +29,7 @@
   const tile=(label,value,sub)=>`<div class="kpi"><span>${label}</span><strong>${value}</strong><small>${sub}</small></div>`;
   el('ecoStats').innerHTML=tile('Cobros reales',money(a),`${incomes.length} ingresos`)+tile('Gastos pagados',money(b),`${expenses.length} gastos`)+tile('Resultado provisional',money(a-b),'No equivale al beneficio fiscal')+tile('Ingreso por hora',hours?money(a/hours):'—',`${hours.toLocaleString('es-ES')} horas anotadas`);
   el('ecoRows').innerHTML=state.rows.map(r=>`<tr><td>${safe(r.movement_date)}</td><td>${r.kind==='ingreso'?'Ingreso':'Gasto'}</td><td>${safe(r.concept)}</td><td>${r.kind==='ingreso'?'+':'−'}${money(r.amount)}</td><td>${safe(r.kind==='ingreso'?(r.payment_method+' · '+(r.document_status||'pendiente')):(r.category||''))}</td><td><button type="button" data-eco-delete="${safe(r.id)}">Eliminar</button></td></tr>`).join('')||'<tr><td colspan="6">Todavía no hay movimientos en este mes.</td></tr>';
+  if(document.body.dataset.mobile==='true')el('ecoRows').querySelectorAll('[data-eco-delete]').forEach(b=>b.remove());
   el('ecoRows').querySelectorAll('[data-eco-delete]').forEach(b=>b.onclick=async()=>{
    const row=state.rows.find(r=>r.id===b.dataset.ecoDelete);if(!row||!confirm(`¿Eliminar ${row.kind} de ${money(row.amount)} (${row.concept})?`))return;
    const {error}=await client().from('economic_movements').delete().eq('id',row.id);if(error)status(error.message);else await load();
@@ -53,6 +54,7 @@
  el('ecoMonth').onchange=load;el('ecoReload').onclick=load;el('ecoExport').onclick=exportCsv;
  for(const kind of ['ingreso','gasto']){const form=el(kind==='ingreso'?'incomeForm':'expenseForm');form.onsubmit=async e=>{e.preventDefault();try{await add(kind)}catch(err){status('Error: '+err.message)}}}
  // El panel principal establece #app visible únicamente tras verificar is_lcm_admin().
+ window.addEventListener('lcm-authenticated',load);window.addEventListener('lcm-data-refresh',load);
  const observer=new MutationObserver(()=>{if(el('app').style.display==='block')load()});observer.observe(el('app'),{attributes:true,attributeFilter:['style']});
  if(el('app').style.display==='block')load();
 })();
