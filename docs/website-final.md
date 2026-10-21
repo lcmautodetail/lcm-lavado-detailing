@@ -1,0 +1,11 @@
+# Web pública · optimización final · 21/10/2026
+
+Portada centrada en Ampuero, solicitud de cita y fotografías reales existentes. Conserva logotipo, Search Console y dirección pública. Añade guía para elegir servicio, mantenimiento y fidelidad (5 sellos 10 %, 10 sellos 25 %), preguntas frecuentes y contacto/horario. No se publican reseñas, valoraciones o promesas de resultados inventadas.
+
+Las ocho fichas usan un diseño compartido, canónicas .html coherentes y enlaces al formulario con servicio preseleccionado. Se añade la ficha del integral básico. Las siete copias [1] y las antiguas rutas con barra se redirigen a la ficha canónica. Se actualizan sitemap, metadatos sociales, foco de teclado, enlace para saltar contenido y menú accesible.
+
+El formulario conserva los endpoints y la operación `LCM_DB.request` del sistema existente. Se corrige la etiqueta de categoría que sobrescribía Servicio, el resumen y el estado de carga, el catálogo paginado y la protección contra respuestas de horarios fuera de orden. El SDK utiliza la copia versionada ya presente en el repositorio. El envío permanece deshabilitado si falla la conexión. No se cambian tablas, permisos, funciones ni reglas de reservas.
+
+Privacidad: el borrador publicado se mantiene con noindex hasta aprobar los datos del titular. El aviso legal y la privacidad se han preparado por separado para revisión privada; no se añaden NIF ni domicilio al repositorio público en esta revisión. No se presenta el cierre legal como completado.
+
+Verificaciones: enlaces locales, anclas, IDs, imágenes referenciadas, canónicas, JSON-LD y XML. `tests/website-booking.cjs` utiliza jsdom 30.1.3 y prueba la carga sin escrituras, servicio preseleccionado, etiquetas, catálogo de más de 1000 modelos, categoría y precio, resumen/hora, envío simulado y fallo de conexión. Para ejecutarlo: instalar jsdom 30.1.3 en una carpeta de pruebas y ejecutar con NODE_PATH apuntando a su node_modules. No envía reservas reales.
