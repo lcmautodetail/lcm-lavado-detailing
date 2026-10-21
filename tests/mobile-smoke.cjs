@@ -1,8 +1,9 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.resolve(__dirname,'..');const html=fs.readFileSync(path.join(root,'gestion.html'),'utf8');
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size,'HTML contains duplicate IDs');
+const generatedMarkup=fs.readFileSync(path.join(root,'fidelidad.js'),'utf8');
 const files=['gestion-metrics.js','gestion-movil.js','gestion-v2.js','gestion-timer.js','gestion-photos.js','fidelidad.js','clientes.js','trabajos.js','economia.js'];
-for(const file of files){const text=fs.readFileSync(path.join(root,file),'utf8');for(const m of text.matchAll(/(?:\$|el)\('([^']+)'\)/g))assert(ids.includes(m[1])||text.includes('id="'+m[1]+'"'),`${file}: missing #${m[1]}`)}
+for(const file of files){const text=fs.readFileSync(path.join(root,file),'utf8');for(const m of text.matchAll(/(?:\$|el)\('([^']+)'\)/g))assert(ids.includes(m[1])||text.includes('id="'+m[1]+'"')||generatedMarkup.includes('id="'+m[1]+'"'),`${file}: missing #${m[1]}`)}
 function harness({failAdmin=false,storageFails=false,session=true,invalidLogin=false}={}){
  const nodes=new Map();const handlers={};const writes=[];let signedOut=false;
  function node(id){if(!nodes.has(id))nodes.set(id,{id,value:'',innerHTML:'',textContent:'',style:{display:id==='app'?'none':''},dataset:{},disabled:false,classList:{values:new Set(id==='app'?['hidden']:[]),add(x){this.values.add(x)},remove(x){this.values.delete(x)},toggle(x,b){b?this.add(x):this.remove(x)},contains(x){return this.values.has(x)}},querySelector(){return node('submit')},querySelectorAll(){return []},addEventListener(e,f){this['on'+e]=f},scrollIntoView(){},insertAdjacentHTML(_,s){this.innerHTML+=s},reset(){}});return nodes.get(id)}
