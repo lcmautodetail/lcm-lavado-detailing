@@ -1,7 +1,7 @@
 (async()=>{
 if(!window.LCM_DB?.configured)return;
 const $=id=>document.getElementById(id), form=$('form'), submit=form.querySelector('button[type="submit"]'),notice=form.querySelector('.note');
-const consent=$('consentimiento');consent.nextElementSibling.innerHTML='He leído la <a href="privacidad[1].html" target="_blank" rel="noopener">política de privacidad</a> y solicito que se gestionen estos datos para tramitar mi cita.';
+const consent=$('consentimiento');consent.nextElementSibling.innerHTML='He leído la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y solicito que se gestionen estos datos para tramitar mi cita.';
 notice.textContent='Solicitud pendiente de confirmación. Precio orientativo sujeto a valoración del estado real del vehículo.';
 submit.textContent='Preparando reservas…';
 $('franja').parentElement.querySelector('label').textContent='Hora disponible';
