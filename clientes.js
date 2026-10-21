@@ -4,23 +4,29 @@
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(Number(n)||0);
-let clients=[],vehicles=[],jobs=[],selected=null,loaded=false;
+let clients=[],vehicles=[],jobs=[],selected=null,loaded=false,orders=[],bookings=[],loadSerial=0;
 const msg=s=>{$('clientMessage').textContent=s};
 const norm=s=>String(s||'').replace(/\D/g,'');
+async function allRows(query){
+ const rows=[];for(let offset=0;;offset+=1000){const r=await query().range(offset,offset+999);if(r.error)throw r.error;rows.push(...(r.data||[]));if(!r.data||r.data.length<1000)return rows}
+}
 async function load(){
  if(!$('app')||$('app').style.display==='none')return;
+ const serial=++loadSerial;
  msg('Cargando clientes…');
  try{
   const db=window.LCM_DB?.client;if(!db)throw Error('Conexión no disponible');
-  const [c,v,j]=await Promise.all([
-   db.from('lcm_clients').select('id,name,phone').order('name'),
-   db.from('lcm_vehicles').select('id,client_id,vehicle,plate').order('vehicle'),
-   db.from('lcm_job_history').select('import_key,client_id,vehicle_id,service,appointment_at,original_price,real_income,original_status,original_payment_status,is_internal,notes').order('appointment_at',{ascending:false})
+  const [c,v,j,o,b]=await Promise.all([
+   allRows(()=>db.from('lcm_clients').select('id,name,phone').order('name').order('id')),
+   allRows(()=>db.from('lcm_vehicles').select('id,client_id,vehicle,plate').order('vehicle').order('id')),
+   allRows(()=>db.from('lcm_job_history').select('import_key,client_id,vehicle_id,service,appointment_at,original_price,real_income,original_status,original_payment_status,is_internal,notes').order('appointment_at',{ascending:false}).order('import_key')),
+   allRows(()=>db.from('lcm_work_orders').select('id,booking_id,client_id,service,work_date,work_status,payment_status').order('id')),
+   allRows(()=>db.from('bookings').select('id,phone,service_name,booking_date,status').order('id'))
   ]);
-  for(const r of [c,v,j])if(r.error)throw r.error;
-  clients=c.data||[];vehicles=v.data||[];jobs=j.data||[];loaded=true;
+  if(serial!==loadSerial||$('app').style.display==='none')return;
+  clients=c;vehicles=v;jobs=j;orders=o;bookings=b;loaded=true;
   msg(`${clients.length} clientes · ${vehicles.length} vehículos · ${jobs.length} trabajos`);render();
- }catch(e){msg('No se pudieron cargar los datos: '+e.message)}
+ }catch(e){if(serial!==loadSerial)return;msg('No se pudieron cargar los datos: '+e.message);if(selected){const warning=$('clientDetail').querySelector('.loyalty-card');if(warning)warning.innerHTML='<p role="alert">No se pudo actualizar la tarjeta. Pulsa Recargar antes de aplicar una bonificación.</p>'}}
 }
 function render(){
  const q=$('clientSearch').value.toLocaleLowerCase('es').trim();
@@ -38,7 +44,7 @@ function detail(){
  const vs=vehicles.filter(v=>v.client_id===c.id),js=jobs.filter(j=>j.client_id===c.id);
  const plate=v=>v.plate?' · '+esc(v.plate):'';
  el.style.display='block';
- el.innerHTML=`<div class="sectiontitle"><h3>${esc(c.name)} · ficha de cliente</h3><button id="closeClient" type="button">Cerrar ficha</button></div><p>Teléfono: <a href="tel:${esc(c.phone.replace(/[^+0-9]/g,''))}">${esc(c.phone)}</a></p><p class="actions"><button type="button" id="editClient">Editar cliente</button><button type="button" id="addVehicleForClient">+ Vehículo</button></p><h4>Vehículos</h4><div>${vs.map(v=>`<p>${esc(v.vehicle)}${plate(v)} <button type="button" data-edit-vehicle="${esc(v.id)}">Editar</button></p>`).join('')||'Sin vehículos'}</div><h4>Historial de servicios (${js.length})</h4><div class="tablewrap"><table><thead><tr><th>Fecha</th><th>Vehículo</th><th>Servicio</th><th>Estado</th><th>Precio original</th><th>Cobro registrado</th></tr></thead><tbody>${js.map(j=>{
+ el.innerHTML=`<div class="sectiontitle"><h3>${esc(c.name)} · ficha de cliente</h3><button id="closeClient" type="button">Cerrar ficha</button></div><p>Teléfono: <a href="tel:${esc(c.phone.replace(/[^+0-9]/g,''))}">${esc(c.phone)}</a></p><p class="actions"><button type="button" id="editClient">Editar cliente</button><button type="button" id="addVehicleForClient">+ Vehículo</button></p>${window.LCM_LOYALTY.render(window.LCM_LOYALTY.model(c.id,{clients,history:jobs,orders,bookings}))}<h4>Vehículos</h4><div>${vs.map(v=>`<p>${esc(v.vehicle)}${plate(v)} <button type="button" data-edit-vehicle="${esc(v.id)}">Editar</button></p>`).join('')||'Sin vehículos'}</div><h4>Historial de servicios (${js.length})</h4><div class="tablewrap"><table><thead><tr><th>Fecha</th><th>Vehículo</th><th>Servicio</th><th>Estado</th><th>Precio original</th><th>Cobro registrado</th></tr></thead><tbody>${js.map(j=>{
  const v=vs.find(v=>v.id===j.vehicle_id);
  return `<tr><td>${esc(String(j.appointment_at).replace('T',' ').slice(0,16))}</td><td>${esc(v?.vehicle||'—')}</td><td>${esc(j.service)}${j.is_internal?' <span class="history-internal">(interno)</span>':''}</td><td>${esc(j.original_status)}<br><small class="muted">${esc(j.original_payment_status)}</small></td><td>${money(j.original_price)}</td><td>${j.is_internal?'0 € · interno':money(j.real_income)}</td></tr>`;
  }).join('')||'<tr><td colspan="6">Sin trabajos</td></tr>'}</tbody></table></div><p class="muted">El historial importado no genera ingresos nuevos.</p>`;
@@ -89,8 +95,9 @@ $('vehicleForm')?.addEventListener('submit',async e=>{
   if(r.error)throw r.error;selected=client_id;$('vehicleEditor').style.display='none';await load();msg('Vehículo guardado correctamente.');window.dispatchEvent(new Event('lcm-records-changed'));
  }catch(err){msg('No se pudo guardar el vehículo: '+err.message)}
 });
-window.addEventListener('lcm-authenticated',load);window.addEventListener('lcm-data-refresh',load);
-const observer=new MutationObserver(()=>{if($('app')?.style.display==='block'&&!loaded)load();if($('app')?.style.display==='none'){$('clientDetail').style.display='none';$('clientEditor').style.display='none';$('vehicleEditor').style.display='none';selected=null;loaded=false}});
+window.addEventListener('lcm-authenticated',load);window.addEventListener('lcm-data-refresh',load);window.addEventListener('lcm-records-changed',load);
+window.addEventListener('lcm-view-change',()=>{if(!$('clients')?.classList.contains('hidden'))load()});
+const observer=new MutationObserver(()=>{if($('app')?.style.display==='block'&&!loaded)load();if($('app')?.style.display==='none'){$('clientDetail').style.display='none';$('clientEditor').style.display='none';$('vehicleEditor').style.display='none';selected=null;loaded=false;loadSerial++}});
 if($('app'))observer.observe($('app'),{attributes:true,attributeFilter:['style']});
 if($('app')?.style.display==='block')load();
 })();
