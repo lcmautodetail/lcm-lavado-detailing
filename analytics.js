@@ -24,7 +24,7 @@ function clearCookies(){
 }
 function choose(value){choice=value;try{localStorage.setItem(key,JSON.stringify({value,at:Date.now()}))}catch{}
  if(value==='accepted')start();else{window['ga-disable-'+id]=true;gtag('consent','update',denied);clearCookies()}
- panel.hidden=true;settings.focus();
+ panel.hidden=true;settings.focus({preventScroll:true});
 }
 function track(name,params={}){if(choice==='accepted')gtag('event',name,{...params,page_location:location.origin+location.pathname})}
 window.LCM_ANALYTICS={track};
