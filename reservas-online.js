@@ -80,6 +80,7 @@ form.addEventListener('submit',async e=>{
  e.preventDefault();e.stopImmediatePropagation();if(!form.reportValidity())return;
  submit.disabled=true;submit.textContent='Enviando…';
  try{await LCM_DB.request({client_name:$('nombre').value.trim(),phone:$('telefono').value.trim(),brand:$('marca').value.trim(),model:$('modelo').value.trim(),vehicle:[$('marca').value,$('modelo').value].join(' ').trim(),vehicle_size:$('tamano').value,dirt_level:$('suciedad').value,service_name:$('servicio').value,booking_date:$('fecha').value,booking_time:slots.value,notes:$('observaciones').value});
+ window.LCM_ANALYTICS?.track('generate_lead');
  form.innerHTML='<div role="status" style="padding:22px;background:#17362d;border:1px solid #3b957b;border-radius:12px"><h2>Solicitud recibida</h2><p>Hemos registrado tu cita como pendiente. Te contactaremos para confirmar el presupuesto y el horario.</p><a href="index.html" style="color:#efd37c">Volver al inicio</a></div>';
  }catch(err){alert(err.message||'No se pudo registrar la reserva');submit.disabled=false;submit.textContent='Solicitar reserva →';await loadSlots()}
 },true);
