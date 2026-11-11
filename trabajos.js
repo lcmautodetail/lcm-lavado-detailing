@@ -24,7 +24,7 @@ async function collect(j){
  if(!due)return msg('No hay importe pendiente.');
  const raw=prompt('¿Cuánto ha pagado ahora? Pendiente: '+euros(due),due.toFixed(2));if(raw===null)return;
  const amount=Number(raw.trim().replace(',','.'));
- if(!Number.isFinite(amount)||amount<=0||amount>due||Math.round(amount*100)!==amount*100)return msg('Introduce un importe válido, con hasta dos decimales.');
+ if(!Number.isFinite(amount)||amount<=0||amount>due||Math.abs(Math.round(amount*100)-amount*100)>0.000001)return msg('Introduce un importe válido, con hasta dos decimales.');
  const m=prompt('Método: Efectivo, Tarjeta, Bizum, Transferencia u Otro','Efectivo');if(m===null)return;
  const method=['Efectivo','Tarjeta','Bizum','Transferencia','Otro'].find(x=>x.toLowerCase()===m.trim().toLowerCase());
  if(!method)return msg('Método de pago no válido.');
