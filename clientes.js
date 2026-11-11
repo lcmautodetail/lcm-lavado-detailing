@@ -45,7 +45,7 @@ function detail(){
  const vs=vehicles.filter(v=>v.client_id===c.id),js=jobs.filter(j=>j.client_id===c.id);
  const plate=v=>v.plate?' · '+esc(v.plate):'';
  const completed=js.filter(j=>['completado','completada','finalizado','finalizada'].includes(String(j.original_status||'').toLowerCase())&&!j.is_internal);
- const lastDates=[...completed.map(j=>String(j.appointment_at||'').slice(0,10)),...orders.filter(o=>o.client_id===c.id&&o.work_status==='finalizado'&&o.payment_status!=='interno').map(o=>String(o.work_date||'').slice(0,10))].filter(d=>/^\\d{4}-\\d{2}-\\d{2}$/.test(d)).sort().reverse();
+ const lastDates=[...completed.map(j=>String(j.appointment_at||'').slice(0,10)),...orders.filter(o=>o.client_id===c.id&&o.work_status==='finalizado'&&o.payment_status!=='interno').map(o=>String(o.work_date||'').slice(0,10))].filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)).sort().reverse();
  const lastDate=lastDates[0]||'';
  const lastLabel=lastDate?lastDate.split('-').reverse().join('/'):'Sin servicios finalizados';
  el.style.display='block';
