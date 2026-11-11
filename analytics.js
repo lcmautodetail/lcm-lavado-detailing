@@ -37,7 +37,7 @@ function ui(){
  (document.querySelector('footer')||document.body).appendChild(settings);document.body.appendChild(panel);
  panel.querySelectorAll('[data-choice]').forEach(button=>button.onclick=()=>choose(button.dataset.choice));
  document.addEventListener('click',event=>{const link=event.target.closest('a[href]');if(!link)return;const url=new URL(link.href,location.href);
- if(['wa.me','api.whatsapp.com','web.whatsapp.com'].includes(url.hostname))track('contact_whatsapp');
+ if(['wa.me','api.whatsapp.com','web.whatsapp.com'].includes(url.hostname))track('contact_whatsapp',{location_context:link.id==='bookingHelpWhatsapp'?'booking_help':'general'});
  else if(url.origin===location.origin&&/\/reservar\.html$/.test(url.pathname))track('view_booking');
  });
 }
