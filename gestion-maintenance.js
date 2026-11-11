@@ -11,9 +11,9 @@ function link(row){let phone=String(row.phone||'').replace(/\D/g,'');if(phone.le
 }
 async function load(){if(document.getElementById('app').classList.contains('hidden'))return;
  const request=++serial;status.textContent='Consultando mantenimientos…';
- try{const {data,error}=await window.LCM_DB.client.rpc('lcm_maintenance_due');if(error)throw error;if(request!==serial)return;
- const rows=data||[];status.textContent=rows.length?rows.length+' cliente'+(rows.length===1?'':'s')+' para contactar.':'No hay mantenimientos pendientes.';
- list.innerHTML=rows.map(row=>'<article class="item"><b>'+esc(row.client_name)+'</b><p>'+esc(row.vehicle||'Vehículo por confirmar')+'<br><small>Último servicio: '+esc(date(row.last_service))+' · Mantenimiento desde '+esc(date(row.due_on))+'</small></p>'+link(row)+'</article>').join('');
+ try{const {data,error}=await window.LCM_DB.client.rpc('lcm_maintenance_due_v2');if(error)throw error;if(request!==serial)return;
+ const rows=data||[];const recurring=rows.filter(r=>Number(r.service_count)>1).length;status.textContent=rows.length?rows.length+' cliente'+(rows.length===1?'':'s')+' para contactar'+(recurring?' · '+recurring+' habituales':'')+'.':'No hay mantenimientos pendientes.';
+ list.innerHTML=rows.map(row=>'<article class="item"><b>'+esc(row.client_name)+'</b>'+(Number(row.service_count)>1?'<span class="pill" style="margin-left:8px">Habitual · '+Number(row.service_count)+' visitas</span>':'')<p>'+esc(row.vehicle||'Vehículo por confirmar')+'<br><small>Último servicio: '+esc(date(row.last_service))+' · Mantenimiento desde '+esc(date(row.due_on))+'</small></p>'+link(row)+'</article>').join('');
  if(location.hash==='#maintenance'){window.LCM_UI?.show('home');panel.scrollIntoView({behavior:'smooth',block:'start'})}
  }catch(e){if(request!==serial)return;list.replaceChildren();status.textContent='No se pudieron consultar los mantenimientos. Pulsa Actualizar.'}
 }
