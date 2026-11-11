@@ -10,11 +10,44 @@ async function load(){if($('app')?.style.display==='none')return;msg('Cargando t
  const [c,v,j,h]=await Promise.all([db().from('lcm_clients').select('id,name,phone').order('name'),db().from('lcm_vehicles').select('id,client_id,vehicle,plate').order('vehicle'),db().from('lcm_work_orders').select('*').order('work_date',{ascending:false}).limit(1000),db().from('lcm_job_history').select('import_key,client_id,vehicle_id,service,appointment_at,original_price,real_income,original_status,original_payment_status,is_internal').order('appointment_at',{ascending:false}).limit(1000)]);
  for(const r of [c,v,j,h])if(r.error)throw r.error;clients=c.data||[];vehicles=v.data||[];jobs=j.data||[];history=h.data||[];loaded=true;render();msg(`${jobs.length} trabajos operativos · ${history.length} trabajos históricos importados (solo lectura).`);
  }catch(e){msg('Error al cargar trabajos: '+e.message)}}
-function render(){ $('jobRows').innerHTML=jobs.map(j=>{const c=clients.find(x=>x.id===j.client_id),v=vehicles.find(x=>x.id===j.vehicle_id);return `<tr><td>${esc(j.work_date)}</td><td>${esc(c?.name||'—')}<br><small>${esc(v?.vehicle||'—')} ${esc(v?.plate||'')}</small></td><td>${esc(j.service)}</td><td>${esc(j.work_status.replace('_',' '))}</td><td>${j.payment_status==='interno'?'Interno · 0 €':`${esc(j.payment_status)} · ${euros(j.amount_paid)} / ${euros(j.agreed_price)}`}</td><td><button type="button" data-job="${esc(j.id)}">Editar</button><button type="button" data-job-timer="${esc(j.id)}">Cronómetro</button></td></tr>`}).join('')||'<tr><td colspan="6">Todavía no hay trabajos nuevos.</td></tr>';
+function render(){ $('jobRows').innerHTML=jobs.map(j=>{const c=clients.find(x=>x.id===j.client_id),v=vehicles.find(x=>x.id===j.vehicle_id);return `<tr><td>${esc(j.work_date)}</td><td>${esc(c?.name||'—')}<br><small>${esc(v?.vehicle||'—')} ${esc(v?.plate||'')}</small></td><td>${esc(j.service)}</td><td>${esc(j.work_status.replace('_',' '))}</td><td>${j.payment_status==='interno'?'Interno · 0 €':`${esc(j.payment_status)} · ${euros(j.amount_paid)} / ${euros(j.agreed_price)}`}</td><td><button type="button" data-job="${esc(j.id)}">Editar</button>${j.booking_id&&j.work_status==='finalizado'&&j.payment_status!=='interno'&&Number(j.agreed_price)>Number(j.amount_paid)?`<button type="button" class="gold" data-job-collect="${esc(j.id)}">Cobrar</button>`:''}<button type="button" data-job-timer="${esc(j.id)}">Cronómetro</button></td></tr>`}).join('')||'<tr><td colspan="6">Todavía no hay trabajos nuevos.</td></tr>';
  const historyRows=history.map(j=>{const cl=clients.find(x=>x.id===j.client_id),v=vehicles.find(x=>x.id===j.vehicle_id);return `<tr><td>${esc(String(j.appointment_at||'').replace('T',' ').slice(0,16))}</td><td>${esc(cl?.name||'—')}<br><small>${esc(v?.vehicle||'—')}</small></td><td>${esc(j.service)}</td><td>${esc(j.original_status)} · histórico</td><td>${j.is_internal?'Interno · 0 €':`${esc(j.original_payment_status)} · ${euros(j.real_income)} / ${euros(j.original_price)}`}</td><td><small>Importado · solo lectura</small></td></tr>`}).join('');
  if(historyRows){const tbody=$('jobRows');if(!jobs.length)tbody.innerHTML='';tbody.insertAdjacentHTML('beforeend',historyRows)}
  $('jobRows').querySelectorAll('[data-job-timer]').forEach(b=>b.onclick=()=>{const j=jobs.find(x=>x.id===b.dataset.jobTimer),c=clients.find(x=>x.id===j.client_id),v=vehicles.find(x=>x.id===j.vehicle_id);if(window.LCM_TIMER)window.LCM_TIMER.assign({id:j.booking_id||'order-'+j.id,client_name:c?.name||'Cliente',vehicle:v?.vehicle||'Vehículo',service_name:j.service})});
  $('jobRows').querySelectorAll('[data-job]').forEach(b=>b.onclick=()=>edit(jobs.find(j=>j.id===b.dataset.job)));
+ $('jobRows').querySelectorAll('[data-job-collect]').forEach(b=>b.onclick=()=>collect(jobs.find(j=>j.id===b.dataset.jobCollect)));
+}
+
+async function collect(j){
+ if(!j||!j.booking_id)return msg('Este trabajo no tiene reserva vinculada. Registra el cobro manualmente en Economía.');
+ const due=Math.max(0,Number(j.agreed_price)-Number(j.amount_paid));if(!due)return msg('Este trabajo no tiene importe pendiente.');
+ const raw=prompt('Importe que cobras ahora (€). Pendiente: '+euros(due),due.toFixed(2));if(raw===null)return;
+ const paid=Number(raw.trim().replace(',','.'));if(!Number.isFinite(paid)||paid<=0||paid>due+0.001)return msg('Introduce un importe entre 0,01 € y '+euros(due));
+ const methodRaw=prompt('Método de cobro: Efectivo, Tarjeta, Bizum, Transferencia u Otro','Efectivo');if(methodRaw===null)return;
+ const method=['Efectivo','Tarjeta','Bizum','Transferencia','Otro'].find(x=>x.toLowerCase()===methodRaw.trim().toLowerCase());if(!method)return msg('Método de cobro no válido.');
+ if(!confirm('Registrar '+euros(paid)+' de cobro en este trabajo y en Economía?'))return;
+ msg('Guardando cobro…');
+ try{
+  const {data:latest,error:le}=await db().from('lcm_work_orders').select('*').eq('id',j.id).single();if(le)throw le;
+  if(latest.payment_status==='interno'||latest.work_status!=='finalizado')throw Error('El trabajo ya no admite este cobro.');
+  const remainder=Math.max(0,Number(latest.agreed_price)-Number(latest.amount_paid));if(paid>remainder+0.001)throw Error('El importe pendiente ha cambiado. Actualiza trabajos.');
+  const {data:old,error:oe}=await db().from('economic_movements').select('*').eq('source_booking_id',j.booking_id);if(oe)throw oe;
+  if(old.length>1)throw Error('Hay varios ingresos vinculados. Revisa Economía.');
+  if(old.length&&old[0].kind!=='ingreso')throw Error('Existe un movimiento vinculado que no es un ingreso.');
+  const already=Number(latest.amount_paid)||0;
+  if(old.length&&Math.abs(Number(old[0].amount)-already)>0.01)throw Error('El ingreso y el trabajo no coinciden. Revisa los registros antes de cobrar.');
+  if(!old.length&&already>0)throw Error('Este trabajo tiene cobros sin ingreso vinculado. Revisa Economía.');
+  if(old.length&&already>0&&old[0].payment_method!==method)throw Error('El cobro anterior tiene otra forma de pago. Registra este pago por separado en Economía.');
+  const total=Number((already+paid).toFixed(2));
+  const now=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const client=clients.find(c=>c.id===j.client_id);
+  const movement=old.length?{amount:total}:{source_booking_id:j.booking_id,kind:'ingreso',movement_date:now,concept:('Cobro · '+j.service).slice(0,180),client_name:(client?.name||'').slice(0,120),amount:total,payment_method:method,document_status:'pendiente'};
+  const result=old.length?await db().from('economic_movements').update(movement).eq('id',old[0].id):await db().from('economic_movements').insert(movement);
+  if(result.error)throw result.error;
+  const updated=await db().from('lcm_work_orders').update({amount_paid:total,payment_status:'pagado'}).eq('id',j.id).eq('amount_paid',already).select('id');
+  if(updated.error)throw updated.error;if(!updated.data?.length)throw Error('El trabajo cambió mientras se guardaba el cobro. Comprueba Economía y actualiza antes de repetir.');
+  await load();window.dispatchEvent(new Event('lcm-data-refresh'));msg('Cobro de '+euros(paid)+' registrado en Trabajo y Economía.');
+ }catch(e){msg('No se pudo completar el cobro: '+e.message+' Si se produjo un error, revisa Economía antes de repetir.');}
 }
 function clientOptions(id){$('jobClient').innerHTML='<option value="">Selecciona cliente</option>'+clients.map(c=>`<option value="${esc(c.id)}">${esc(c.name)} · ${esc(c.phone)}</option>`).join('');$('jobClient').value=id||'';vehicleOptions();}
 function vehicleOptions(chosen){const id=$('jobClient').value;$('jobVehicle').innerHTML='<option value="">Selecciona vehículo</option>'+vehicles.filter(v=>v.client_id===id).map(v=>`<option value="${esc(v.id)}">${esc(v.vehicle)} · ${esc(v.plate||'sin matrícula')}</option>`).join('');$('jobVehicle').value=chosen||'';}
