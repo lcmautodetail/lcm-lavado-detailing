@@ -10,7 +10,7 @@ async function load(){
  try{
   const [dueResult,jobResult]=await Promise.all([
    db().rpc('lcm_maintenance_due'),
-   db().from('lcm_work_orders').select('id,client_id,service,work_date,agreed_price,amount_paid,work_status,payment_status').eq('work_status','finalizado').eq('payment_status','pendiente').order('work_date',{ascending:false}).limit(300)
+   db().from('lcm_work_orders').select('id,client_id,service,work_date,agreed_price,amount_paid,work_status,payment_status').eq('work_status','finalizado').neq('payment_status','interno').order('work_date',{ascending:false}).limit(300)
   ]);
   if(ticket!==serial)return;
   const due=dueResult.error?null:(dueResult.data||[]);
